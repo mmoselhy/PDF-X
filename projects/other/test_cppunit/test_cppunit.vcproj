@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="test_cppunit"
+	ProjectGUID="{54BD1798-9070-4080-939E-7CFCC7AECE12}"
+	RootNamespace="test_cppunit"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+      InheritedPropertySheets="$(SolutionDir)\vsprops\base.vsprops;$(SolutionDir)\vsprops\release.vsprops;$(SolutionDir)\vsprops\win32.vsprops;$(SolutionDir)\vsprops\exe.vsprops"
+  		ConfigurationType="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="echo &quot;PdfEdit -- testing $(ProjectName) availability&quot;"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				CommandLine="echo &quot;PdfEdit -- If NOT successful, please install $(ProjectName) properly.&quot;"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="echo &quot;PdfEdit -- $(ProjectName) available.&quot;"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<File
+			RelativePath=".\test_cppunit.cpp"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

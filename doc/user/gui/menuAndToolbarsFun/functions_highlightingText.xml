@@ -1,0 +1,14 @@
+<sect3 id="gui_onclickFunctions_highlightingText" xreflabel="mode to highlighting text">
+		<title>Highlighting text</title>
+
+		<para>
+				Highlighting of text is a very desired feature. This mode can highlight selected text.
+		</para>
+		<para>
+				After activating this mode user can select text the same way as by
+				<xref linkend="gui_onclickFunctions_selectText"/>. After ending the selection
+				script function is called which draws filled rectangle under each text operator with
+				default background colour (for more details see
+				<xref linkend="gui_onclickFunctions_drawRect"/>).
+		</para>
+</sect3>

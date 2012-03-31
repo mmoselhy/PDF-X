@@ -1,0 +1,26 @@
+PDFedit authors
+===============
+Michal Hocko
+Miroslav Jahoda
+Jozef Misutka
+Martin Petricek
+
+Thanks to
+=========
+Derek Noonburg		Xpdf author (http://www.foolabs.com/xpdf)
+
+Other contributors
+==================
+Tiziano Mattei		Tango icon theme. See src/gui/icon/Tango/README for more information about this set
+Vicente Romero Calero 	Spanish translation
+Andreas Mantke, Georg Hofmann	German translation
+Alexandre Prokoudine 	Russian translation
+Sylvain			French translation
+Yi-Shun Wang		Chinese (traditional) translation
+Pavel Ondrousek 	RPM package, available at http://sourceforge.net/project/showfiles.php?group_id=177354
+Varun Hiremath	 	Debian package, available at http://packages.qa.debian.org/p/pdfedit.html
+Pavel Sanda		Gentoo ebuild, available at Sun Overlay repository
+Lubomir Kundrak		NetBSD package, available at http://pkgsrc.se/wip/pdfedit
+
+Also thanks to Varun Hiremath, Ron Kaminsky and Martin Michlmayr for various small patches
+and many other people for their suggestions and bug reports.

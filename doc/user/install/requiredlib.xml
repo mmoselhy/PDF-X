@@ -1,0 +1,56 @@
+ <section id="required_libraries">
+  <title>Required libraries</title>
+  <para>
+   These libraries are required to build and install PDF Editor:
+   <informaltable frame="none">
+    <tgroup cols="2"><tbody>
+     <row><entry>qt3</entry><entry>Qt GUI Toolkit (Version 3.x)
+      <note>
+       Most linux distribution split libraries into two parts, binary (containing the library binaries) and development (containing headers and development tools).
+       Also, in most linux distributions, the development libraries are not installed by default.
+       For QT3 you will need the development version too. Name of the package is usually the same as name of the library binary package, suffixed by "-dev".
+       (For example in ubuntu it is <filename>libq3-mt-dev</filename> for the development version, while the library binaries are named <filename>libq3-mt</filename>)
+      </note> 
+     </entry></row>
+     <row><entry>boost</entry><entry>Boost C++ Libraries (smart_ptr)</entry></row>
+     <row><entry>xlib</entry><entry>X Window System libraries</entry></row>
+    </tbody></tgroup>
+   </informaltable>
+   Modified version of qsa library (Qt Script for Applications), version 1.1.5 is included in the source tree
+   <note>
+    If you have both Qt3 and Qt4 installed, you must have directory with Qt3 tools
+    (<filename>qmake</filename>, etc...) before Qt4 in <envar>PATH</envar>.
+     Pdf editor cannot be compiled with Qt Toolkit version 4.x.
+   </note> 
+  </para>
+  <para>
+   We tested compiling with various g++ versions - 3.x and 4.x were fine, it may compile on older versions
+   like 2.95, but it was not tested.
+   Program uses extensively RTTI, so the compiler used to build the program must support it.
+  </para>
+  <para>
+   For building kernel tests, you need to have CPPunit installed
+  </para>
+  <para>
+   For rebuilding documentation from DocBook .xml files, <command>gmake</command> (GNU make) is required
+   and you also need:
+   <itemizedlist>
+    <listitem>
+     <para>
+      For generating HTML : <command>xsltproc</command> from  libxslt and docbook stylesheets 
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      For generating PDF : <command>xsltproc</command> from libxslt, docbook stylesheets
+      and Apache FOP from http://xmlgraphics.apache.org/fop/
+     </para>
+    </listitem>
+   </itemizedlist>
+   If some of the required dependencies is missing, documentation in appropriate format will not be generated.
+   In distributed archive, HTML documentation is already generated.
+  </para>
+  <para>
+   For rebuilding programmer reference, doxygen is required.
+  </para>
+ </section>

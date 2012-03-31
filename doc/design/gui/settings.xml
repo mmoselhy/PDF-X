@@ -1,0 +1,94 @@
+ <chapter id="settings">
+  <title>Settings system</title>
+  <para>
+   PDF Editor uses <classname>QSettings</classname> and <classname>StaticSettings</classname>
+   as backend to store its configuration.
+   Internally, <classname>StaticSettings</classname> is used for static settings
+   (which cannot be modified) and <classname>QSettings</classname> for dynamic settings.
+   We can see the static settings as system settings and dynamic settings as user settings. 
+   Setting uses key/value scheme, where the keys maintain some directory-like hierarchy,
+   with components separated by slash - "/". This helps managing related settings together.
+   Only limitation is that first and last character in settings should not be slash
+   and there should not be two consecutive slashes in the key, otherwise unpredictable
+   behavior might occur.
+  </para>
+  <para>
+   Any value specified in user settings overrides corresponding value in system
+   (static) settings, so basically only values not found in user settings are
+   searched in system settings.
+  </para>
+  <para>
+   There is also support for connecting function to a slot that notifies about any setting change.
+   This way the GUI can maintain consistent state with stored settings, independend of way in which
+   the settings is changed, whether it is in option dialog, or by some script.
+  </para>
+  <sect1 id="static_settings">
+   <title>Static (system) Settings</title>
+   <para>
+    Static settings are stored in file <filename>pdfeditrc</filename>.
+    This file is looked for at application start, first in data directory
+    (which is defined in <filename>config.h</filename> in GUI source directory)
+    and if not found there, next is searched the directory,
+    where the editor executable is located.
+    <classname>StaticSettings</classname> class handles reading of this file.
+   </para>
+  </sect1>
+  <sect1 id="settings_format">
+   <title>File format for static settings</title>
+   <para>
+    The format is very similar to the format of "ini file", but have been improved
+    to allow indentation and comments, so the file is better readable and manageable.
+   </para>
+   <para>
+    The file is automatically assumed to be in utf-8 encoding.
+    Any leading or trailing whitespaces on line are ignored, as are any whitespaces
+    between key and equal sign, or between equal sign and value.
+    Blank lines are ignored too.
+    This allow to indent the file to be more human-readable.
+    Basically, not counting comments and blank lines, the file may contain any number
+    of lines with section identifiers and key-value pairs.
+    Section identifier, in format <code>[section path]</code>, sets prefix (i.e. the
+    path in which the keys are stored in) for all following keys, until different
+    section identifier is encountered.
+    Key-value pair, in format <code>key=value</code> specifies one setting that maps value to specified key.
+    Any number of whitespaces can be present directly behind and after the equality (=) character
+    For example, value <code>name = MyName</code> in section specified by its heading
+    <code>[settings/part1]</code> is then referenced in editor by its entire key name
+    <varname>settings/part1/name</varname> and its value would be <parameter>MyName</parameter>
+   </para>
+  </sect1>
+  <sect1 id="dynamic_settings">
+   <title>Dynamic (user) Settings</title>
+   <para>
+    Dynamic settings are stored in file <filename>pdfeditrc</filename>
+    in subdirectory <filename>.pdfedit</filename> in user's home directory.
+    Nota that most other settings (any custom scripts, icons, etc ...) are stored by default
+    in that directory too.
+    This file is read by <classname>QSettings</classname> class on application start and when last window
+    is closed, the settings are writen back (if they were modified).
+    Also, the file is explicitly written when user presses <guibutton>Ok</guibutton>
+    or <guibutton>Apply</guibutton> button in Option dialog (to avoid losing settings
+    if the program crashes or is killed)
+    or if requested by script, for example by calling <code>settings.flush()</code>.
+   </para>
+  </sect1>
+  <sect1 id="user_settings">
+   <title>File format for user settings</title>
+   <para>
+    The format is basically an "ini file". You can not insert any comments in the file
+    or indent it, as it is not supported by the <classname>QSettings</classname>
+    configuration file parser and the settings will be overwritten anyway when the file is updated.
+   </para>
+   <para>
+    Basically, the file may contain any number of sections, each section having one or more key-value pairs.
+    Section identifier, in format <code>[section path]</code>, sets prefix (i.e. the
+    path in which the keys are stored in) for all keys in the section, while section named <varname>General</varname>
+    have special meaning off being section with "empty prefix" (root section)
+    After section identifier, the key-value pairs follow, one on line, in format <code>key=value</code> - 
+    they specify one setting that maps value to specified key.
+    After last key-value pair in one section and the next section is one extra blank line.
+    Putting extra blank lines in middle of the section (or anywhere else) is not allowed,
+    as it will break the file format.
+   </para>
+  </sect1>
+ </chapter>

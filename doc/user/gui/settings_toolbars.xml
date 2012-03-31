@@ -1,0 +1,19 @@
+<sect1 id="toolbars_tab">
+	<title>Toolbars tab</title>
+	<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/images/options_toolbars.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Toolbars tab</phrase>
+				</textobject>
+			</mediaobject>
+	</para>
+ <para>
+  Each checkbox on this tab represent one toolbar in the program.
+  You can toggle visibility of each toolbar here, if the checkbox
+  before toolbar name is checked, the toolbar will be visible.
+  If unchecked, the toolbar will be hidden.
+ </para>
+</sect1>

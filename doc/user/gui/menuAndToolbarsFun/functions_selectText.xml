@@ -1,0 +1,24 @@
+<sect3 id="gui_onclickFunctions_selectText" xreflabel="mode to select text">
+		<title>Selecting text</title>
+
+		<para>
+				This mode is useful when selecting text on page. It behaves like expected from
+				text selecting. Word and line order is respected on pages with
+				horizontal text lines (most of pdf files).
+		</para>
+		<para>
+				Text selection is very simple using this mode. The selection starts when
+				mouse left button is pressed on a text element. (If the mouse is over a text element
+				the cursor changes to ibeam.) When dragging, text is
+				selected line by line. The selection is limited in how the text elements are stored in
+				the pdf document (some documents have text elements equal to letters, to words,
+				to lines or arbitrary).
+		</para>
+		<para>
+			Note:
+				When a text on one line is written using different fonts it is very likely that it will
+				be parsed into more lines. This is due to the fact that the base vertical positions are different
+				and without wild guessing it is almost impossible to distinguish between text on one with different
+				fonts and text on more lines with different fonts.
+		</para>
+</sect3>

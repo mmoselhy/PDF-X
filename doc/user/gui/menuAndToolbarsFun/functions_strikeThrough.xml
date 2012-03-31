@@ -1,0 +1,14 @@
+<sect3 id="gui_onclickFunctions_strikeThrough" xreflabel="mode to strike trough of text">
+		<title>Strike through text</title>
+
+		<para>
+				You can easily strike through words, lines with this mode.
+		</para>
+		<para>
+				Selecting of text is the same as by
+				<xref linkend="gui_onclickFunctions_selectText"/>. After endind the selection
+				scipt function is called which draws a line through selected text default 
+				colour, dash style and line width (for more details see
+				<xref linkend="gui_onclickFunctions_drawLine"/>).
+		</para>
+</sect3>

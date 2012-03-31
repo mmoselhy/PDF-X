@@ -1,0 +1,9 @@
+Makefile
+pdffonts
+pdfimages
+pdfinfo
+pdftops
+pdftoppm
+xpdf
+pdftotext
+deps

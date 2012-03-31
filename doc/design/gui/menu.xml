@@ -1,0 +1,191 @@
+ <chapter id="menu_toolbar_sys">
+  <title>PDF Editor menu and toolbar system</title>
+  <para>
+   Configuration of menus and toolbars are in the main configuration file <filename>pdfeditrc</filename>,
+   which is placed in the data directory (by defalt it is configured as <filename>/usr/share/pdfedit</filename>).
+   Format of the file is 'ini file', where sections have heading composed of its name in square brackets,
+   followed by lines in format "<code>key=value</code>"
+  </para>
+  <para>
+   In home directory in file <filename>.pdfedit/pdfeditrc</filename> are user settings. User can redefine any key
+   in any section, thus he have possibility to modify editor menus as he deem appropriate.
+  </para>
+  <sect1 id="menu_toolbar">
+   <title>Menus and Toolbars</title>
+   <para>
+    Menus are stored in <structname>gui</structname> section. Each menu, menu item, toolbar or toolbar item have
+    a unique name (all these share common namespace) - also, menu items often can be used as toolbar items (as long
+    as they have icon) and toolbar items can be used as menu items (as long as they have text).
+   </para>
+   <sect2 id="list_item">
+    <title>Lists and items</title>
+    <para>
+     Each item is either a "list", "label" or "item".
+     These are menus and menu items in context of menu, or toolbars, labels and toolbar items in context of toolbar.
+     Toolbar can also contain special items.
+    </para>
+    <para>
+    Usage is basically the same for menus and toolbars, but there are some differences:
+    </para>
+    <itemizedlist>
+     <listitem>Lists in menu can contain items (menu items) or lists (submenus).
+      Submenus can be nested to any level, but you cannot create a loop. Program will tell you about the loop and will not start if you do so.
+      List used as toolbar can contain only items and labels</listitem>
+     <listitem>Menu item does not need icon, toolbar item needs icon</listitem>
+     <listitem>Caption in menu items will be used as text of the menu items, caption in toolbar items will be used as tooltip</listitem>
+    </itemizedlist>
+    <para>
+     List called <varname>MainMenu</varname> will be used as editor's main menu.
+     Key called <varname>toolbars</varname> contain comma separated list of toolbar names. Only toolbars specified here
+     will be available in editor.
+    </para>
+    <formalpara>
+     <title>Format of one list</title>
+     <programlisting>items/<varname>name_of_list</varname>=list <varname>Caption of menu</varname>,<varname>menu item 1, menu item 2, ....</varname></programlisting>
+     Number of items in one list is not limited, but note that dimensions of screen where the menu or toolbars will be shown are limited.
+     Each menu items referenced in the list must exist, invalid item will cause editor not to start with an error message.
+     If you want to insert separator in the menu, use "-" (single dash) in place of items's name
+     <synopsis>Caption of item</synopsis> is text that will be shown as menu text/tooltip.
+     All further parameters (comma separated) following caption are items that will be contained in the list.
+    </formalpara>
+    <formalpara>
+     <title>Appending items to list</title>
+     <programlisting>items_add/<varname>name_of_list</varname>=<varname>menu item 1, menu item 2, ....</varname></programlisting>
+     This way you can add items to an existing list. Only one "item_add" field can exist for each list and is used mostly for
+     adding extra items to any of the menus in user configuration file, without having to redefine entire list and its items.
+     This field is composed of comma separated menu items to be appended at end of the menu, syntax of items is same as items
+     in ordinary list.
+    </formalpara>
+    <formalpara>
+     <title>Format of one item</title>
+     <programlisting>items/<varname>name_of_item</varname>=item <varname>Caption of item</varname>,<varname>Command</varname>,<varname>Keyboard_shortcut</varname>,<varname>Icon</varname></programlisting>
+     <note>
+      Elements in this definition are comma separated.
+      If any element should include comma in its content, you must escape the comma by backslash, otherwise the comma would be treated as separator of elements.
+      Also, backslash must be escaped by extra backslash.
+     </note>
+     <synopsis>Icon</synopsis> is name of file with icon image.
+     The icon should may be in PNG, BMP, XBM, XPM or PNM format, although PNG is recommended.
+     Also supported may be JPEG, MNG and GIF - depend on how QT library used to compile the
+     editor is configures. You should not rely on support of these formats when creating menus.
+     Can be omitted or left blank.
+     <synopsis>Caption of item</synopsis> is text that will be shown as caption.
+     <synopsis>Command</synopsis> is any piece of script that will be run when this item is clicked.
+     For longer or more complex commands it is recommended to define them as functions in init.qs and from menu only call them ...
+     These are two special cases:
+     <itemizedlist>
+      <listitem>if the string used as command is "quit", the editor will quit (close all windows)</listitem>
+      <listitem>if the string used as command is "closewindow", the editor will close current windows</listitem>
+     </itemizedlist>
+     <synopsis>Keyboard_shortcut</synopsis>
+     This specifies keyboard shortcut that will invoke the action.
+     If two different items have the same shortcut, the result is undefined.
+     Can be omitted (if icon is also omitted) or just left blank (no keyboard shortcut).
+     Format is modifiers+key, for example: <keycombo>Ctrl+A</keycombo>, <keycombo>Shift+X</keycombo>, <keycombo>Ctrl+Alt+Z</keycombo>
+    </formalpara>
+    <formalpara>
+     <title>Format of one label</title>
+     <programlisting>items/<varname>name_of_item</varname>=label <varname>Caption of label</varname></programlisting>
+     Label with short description text, usually places before or after other items.
+     Label is valid only in toolbar, menu can not contain a label.
+    </formalpara>
+   </sect2>
+   <sect2 id="special_item">
+    <title>Special toolbar items</title>
+    <para>
+     Toolbar can also contain some special items,
+     that provide more functionality than just a button.
+     Such items have always name starting with underscore character
+     and therefore it is advised not to use such names for naming your own items to avoid
+     possible collision.
+     You can insert them into any toolbar just by referencing their name in a list.
+     Some of the items have parameter, in such case, the name of the item should be
+     followed by space, followed by the parameter value. For example,
+     <userinput>_color_tool fg</userinput> specify <varname>_color_tool</varname> item
+     with parameter <parameter>fg</parameter>.
+     <table frame="none" id="list_special_item">
+      <title>List of special toolbar items</title>
+      <tgroup cols="2">
+       <thead>
+        <row><entry>Name</entry><entry>Description</entry></row>
+       </thead>
+       <tbody>
+        <row>
+         <entry>_revision_tool</entry>
+         <entry>Tool to list revisions and change them</entry>
+        </row>
+        <row>
+         <entry>_zoom_tool</entry>
+         <entry>Tool to change zoom level of currently shown page</entry>
+        </row>
+        <row>
+         <entry>_page_tool</entry>
+         <entry>Tool to show and change which page is currently shown</entry>
+        </row>
+        <row>
+         <entry>_color_tool</entry>
+         <entry>Tool to pick named color. Parameter specifies name of the color</entry>
+        </row>
+        <row>
+         <entry>_edit_tool</entry>
+         <entry>Tool to edit arbitrary text. Parameter specifies name of the text</entry>
+        </row>
+        <row>
+         <entry>_number_tool</entry>
+         <entry>
+          Tool to edit arbitrary number. Parameter specifies name of the number
+          and it is possilbe in script to specify predefined set of number, that will be
+          available in a drop-down box. User is still able to type in a number not present
+          in the list.
+         </entry>
+        </row>
+        <row>
+         <entry>_select_tool</entry>
+         <entry>
+          Tool to select text from list of strings. Parameter specifies name of the text
+          and it is possible in script to specify set of strings, that will be
+          available in a drop-down box.
+         </entry>
+        </row>
+       </tbody>
+      </tgroup>
+     </table>
+     <note>
+      The name must be unique for special toolbar items that have name as parameter.
+      If you create two toolbar items with same name, the results are undefined.
+     </note>
+    </para>
+   </sect2>
+  </sect1>
+  <sect1 id="icons">
+   <title>Icons</title>
+   Path where to look for icons is defined in <varname>path</varname> section of configuration file.
+   Key <varname>icon</varname> specifies semiciolon separated list of path, which will be searched
+   from first to last intil the icon is found.
+   Path elements may contain variable references in shell style (<userinput>$VARIABLE</userinput>
+   and <userinput>${VARIABLE}</userinput>), which will be expanded automatically.
+   Default icon path is <filename>$HOME/.pdfedit/icon</filename>;<filename>/usr/share/pdfedit/icon</filename>.
+   Recommended way for user to install his own icons is doing it in by copying them to <filename>.pdfedit/icon</filename>
+   subdirectory in his home directory.
+  </sect1>  
+  <sect1 id="icon themes">
+   <title>Icon themes</title>
+   <para>
+    PDF Editor support icon themes.
+    Themes can be created by creating subdirectory in any directory from icon path
+    and putting some custom icons there. Theme then can be activated by modifying
+    the <varname>theme/current</varname> key in the <varname>icon</varname> section
+    in configuration - set the key to name of the directory with theme.
+    Or it can be simply specified in 'Icon theme' field in editor's configuration dialog.
+   </para>
+   <para>
+    Editor look first for icon from theme across all directories in icon path, by
+    appending a theme name to the path - so for example if theme is
+    <varname>hicolor</varname> and one icon directory is
+    <filename>$HOME/.pdfedit/icon</filename>, editor looks in
+    <filename>$HOME/.pdfedit/icon/hicolor</filename> for that directory.
+    If a themed icon is not found, editor looks for a default icon in the icon directory
+    itself (which also correspond to a <varname>default</varname> theme).
+   </para>
+  </sect1>  
+ </chapter>

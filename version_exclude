@@ -1,0 +1,5 @@
+src/tests/
+aconf\.h
+\.menu-trans.h
+src/qsa
+src/gui/version.cc

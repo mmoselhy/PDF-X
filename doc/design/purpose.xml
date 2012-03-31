@@ -1,0 +1,41 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<part id="document_purpose">
+    <title>Document purpose</title>
+	<para>
+		This document describes design and internals of PDFedit program intended 
+		for PDF documents manipulation. It doesn't bring precise code or 
+	    classes description but rather provides ideas and general
+	    information to understand the implementation. If somebody wants to
+	    use or reuse this project or understand current state he/she 
+	    should start with this document and then follow with 
+	    automatically generated doxygen programming documentation.
+	</para>
+	<sect1 id="document_organization">
+	    <title>Document organization</title>
+	    <para>
+		Document itself is divided into several parts:
+		<itemizedlist>
+		    <listitem>
+			<xref linkend="general_part"/> which focuses on global 
+			application design, separation to layers, general utils
+			common for all layers and cooperation and integration
+			with xpdf project.
+		    </listitem>
+		    <listitem>
+			<xref linkend="kernel_part"/> which focuses on 
+			detailed kernel architecture and interface for gui 
+			description.
+		    </listitem>
+		    <listitem>
+			<xref linkend="gui_part"/> which describes gui
+			architecture.
+		    </listitem>
+		    <listitem>
+			<xref linkend="glossary_part"/> which describes used
+			terms in whole document.
+		    </listitem>
+		</itemizedlist>
+	    </para>
+	</sect1>
+</part>

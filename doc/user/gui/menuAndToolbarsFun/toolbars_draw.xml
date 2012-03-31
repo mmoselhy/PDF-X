@@ -1,0 +1,62 @@
+<sect2 id="gui_toolbars_draw" xreflabel="toolbar Draw">
+		<title>Draw</title>
+
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/toolbars_draw.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Toolbar - Draw</phrase>
+				</textobject>
+				<caption><para>Toolbar - Draw</para></caption>
+			</mediaobject>
+		</para>
+
+
+		<variablelist>
+			<varlistentry>
+				<term>Draw line</term>
+				<listitem>See <xref linkend="gui_menu_drawLine"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Draw rectangle</term>
+				<listitem>See <xref linkend="gui_menu_drawRectangle"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Add text</term>
+				<listitem>See <xref linkend="gui_menu_addText"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Strike through</term>
+				<listitem>See <xref linkend="gui_menu_strikeThrough"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Highlighting text</term>
+				<listitem>See <xref linkend="gui_menu_highlightingText"/>.</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term id="gui_toolbars_foregroundColor" xreflabel="foreground color">Foreground colour</term>
+				<listitem>
+					This is the default foreground colour. Many operations use this colour to draw objects (e.g. lines, 
+					rectangles,...)
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term id="gui_toolbars_backgroundColor" xreflabel="background color">Background colour</term>
+				<listitem>
+					This is the default background colour. Many operations use this colour to draw objects (e.g. 
+					rectangle background,...)
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term id="gui_toolbars_lineWidth" xreflabel="line width">Line width</term>
+				<listitem>
+					This is the default line width. Many operations use this number to specify object
+					property (e.g. line width, ...)
+				</listitem>
+			</varlistentry>
+		</variablelist>
+</sect2>

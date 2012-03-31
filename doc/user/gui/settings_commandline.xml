@@ -1,0 +1,81 @@
+<sect1 id="gui_settings_commandline" xreflabel="settings of command console">
+	<title>Commandline tab</title>
+
+	<para>
+			The appereance of command editor can be customized in options dialog on tab "commandline".
+			To execute options dialog click Tools/Options in menu or type <emphasis>options()</emphasis>
+			in command editor or click the options icon in toolbar.
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/images/options_commandline.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Commandline tab</phrase>
+				</textobject>
+			</mediaobject>
+	</para>
+
+	<sect2 id="show_retvalue">
+		<title>Show return value of executed script in console</title>
+		<para>
+				If this setting is checked, command console will print return value of last command
+				after executing it. It has basically the same effect as if last command was a
+				parameter of function <function>print()</function>.
+		</para>
+	</sect2>
+	<sect2 id="show_retvalue_complex">
+		<title>Show return value also for complex type</title>
+		<para>
+				This will toggle displaying the return value for complex types, such as arrays,
+				which are likely to produce lot of output, as arrays tend to be large.
+		</para>
+	</sect2>
+	<sect2 id="show_error_event">
+		<title>Show errors from event handlers</title>
+		<para>
+				Check this if you want to see error from callback handlers.
+				If there is error in callback handler which is called very often,
+				like handler for current item in tree being changed, it can produce
+				lot of output.
+		</para>
+	</sect2>
+	<sect2 id="show_cmdedit">
+		<title>Show command editor</title>
+		<para>
+				If set, command editor is shown.
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="gui/images/command_options_cmdedit.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase>Command console without / with command editor</phrase>
+					</textobject>
+					<caption><para>Command console without / with command editor</para></caption>
+				</mediaobject>
+		</para>
+	</sect2>
+	<sect2 id="show_cmdline">
+		<title>Show command line</title>
+		<para>
+				If set, history is displayed in a combobox. This is useful when older history commands are needed.
+		</para>
+	</sect2>
+	<sect2 id="editable_cmdline">
+		<title>Editable command line</title>
+		<para>
+				If set, editable command line is shown in history combobox.
+				This is usefull when small space for typing command is needed.
+				(set command editor	hidden).
+		</para>
+	</sect2>
+	<sect2 id="history_option">
+		<title>History option</title>
+		<para>
+				If set, history is saved and loaded to the command line. You can specify the maximum number 
+				of lines to store.
+		</para>
+		<para>
+				Note: History is saved when PDFedit's window is closed.
+		</para>
+	</sect2>
+</sect1>

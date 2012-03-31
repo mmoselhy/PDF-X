@@ -1,0 +1,11 @@
+Makefile
+Makefile-tests
+kernel.pro
+main.cc
+kernel
+kernel.gch
+kernel_tests
+1.txt
+1.xml
+deps
+pdfedit-core-dev-config

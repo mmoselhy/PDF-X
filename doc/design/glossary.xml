@@ -1,0 +1,402 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<!-- Each entry of glossary should be defined within glossary tags by
+glossentry tags with id used by xref tag in the general text. 
+Example:
+	<glossary>
+		...
+		<glossentry id="identificator">
+			<glossterm>Term declaration</glossterm>
+			<glossdef>
+				Term definition/description (it can contain 
+				formated text pictures or arbitrary formatted 
+				text.
+			</glossdef>
+		</glossentry>
+		...
+	</glossary>
+-->
+
+
+<glossary id="glossary_part">
+	<glossentry id="adapter">
+		<glossterm>Adapter design pattern</glossterm>
+		<glossdef>
+		<para>
+			The adapter design pattern (sometimes referred to as the wrapper 
+			pattern or simply a wrapper) 'adapts' one interface for a class 
+			into one that a client expects. An adapter allows classes to work 
+			together that normally could not because of incompatible interfaces
+			by wrapping its own interface around that of an already existing 
+			class.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/objectadapter.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Object Adapter</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="composite">
+		<glossterm>Composite design pattern</glossterm>
+		<glossdef>
+		<para>
+			Composite is an object designed as a composition of one-or-more 
+			similar objects (other kinds of shapes/geometries), all exhibiting 
+			similar functionality. This is known as a "has-a" relationship 
+			between objects. The key concept is that you can manipulate a 
+			single instance of the object just as you would a group of them.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/compositepattern.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Composite</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="content_stream">
+		<glossterm>Content stream</glossterm>
+		<glossdef>
+		<para>
+			A content stream is a PDF stream object whose data consists of a
+			sequence of instructions describing the graphical elements to be 
+			painted on a page. The instructions are represented in the form 
+			of PDF objects, using the same object syntax as in the rest of the
+			PDF document. However, whereas the document as a whole is a static,
+			random-access data structure, the objects in the content stream 
+			are intended to be interpreted and acted upon sequentially.
+      		Each page of a document is represented by one or more content 
+			streams.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="crossref_table">
+		<glossterm>Cross reference table</glossterm>
+		<glossdef>
+		<para>
+			The cross-reference table contains information that permits 
+			random access to indirect objects within the file so that the 
+			entire file need not be read to locate any particular object. The
+			table contains a one-line entry for each indirect object, 
+			specifying the location of that object within the body of the 
+			file. (Beginning with PDF 1.5, some or all of the cross-reference
+			information may alternatively be contained in cross-reference 
+			streams; see Pdf specification Section 3.4.7, (Cross-Reference 
+			Streams).
+			The cross-reference table is the only part of a PDF file with a 
+			fixed format, which permits entries in the table to be accessed 
+			randomly.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="decorator">
+		<glossterm>Decorator design patter</glossterm>
+		<glossdef>
+		<para>
+			The decorator pattern works by wrapping the new "decorator" object 
+			around the original object, which is typically achieved by passing 
+			the original object as a parameter to the constructor of the 
+			decorator, with the decorator implementing the new functionality. 
+			The interface of the original object needs to be maintained by the 
+			decorator.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/decaratorpattern.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Decorator</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="ecmascript">
+		<glossterm>ECMAScript</glossterm>
+		<glossdef>
+		<para>
+		ECMAScript is programming language, similar to Javascript (which is in fact extension of ECMAScript).
+		The language is standardized by Ecma International as Standard ECMA-262, also approved as ISO/IEC 16262.
+		For more details, see the specification:
+                </para>
+                <para>
+                <ulink url="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">ECMAScript Language Specification, 3rd edition (December 1999)</ulink>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="dictionary">
+		<glossterm>Pdf dictionary data type</glossterm>
+		<glossdef>
+		<para>
+			A dictionary object is an associative table containing pairs of 
+			objects, known as the dictionary's entries. The first element of 
+			each entry is the key and the second element is the value. The 
+			key must be a name (unlike dictionary keys in PostScript, which 
+			may be objects of any type). The value can be any kind of object,
+      		including another dictionary.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="document_catalog">
+		<glossterm>Pdf document catalog</glossterm>
+		<glossdef>
+		<para>
+			The root of a document's object hierarchy is the catalog 
+			dictionary, located by means of the Root entry in the trailer of 
+			the PDF file (see Pdf specification Section 3.4.4, File Trailer). 
+			The catalog contains references to other objects defining the 
+			document's contents, outline, article threads (PDF 1.1), named 
+			destinations, and other attributes. In addition, it contains 
+			information about how the document should be displayed on the 
+			screen, such as whether its outline and thumbnail page images
+      		should be displayed automatically and whether some location other 
+			than the first page should be shown when the document is opened.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="factory_method">
+		<glossterm>Factory method design pattern</glossterm>
+		<glossdef>
+		<para>
+			The Factory Method pattern is an object-oriented design pattern. 
+			Like other creational patterns, it deals with the problem of 
+			creating objects (products) without specifying the exact class 
+			of object that will be created. Factory Method, one of the 
+			patterns from the Design Patterns book, handles this problem by
+			defining a separate method for creating the objects, which 
+			subclasses can then override to specify the derived type of 
+			product that will be created.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/factorymethodpattern.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Factory method</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="facade">
+		<glossterm>Facade design pattern</glossterm>
+		<glossdef>
+		<para>
+			The facade pattern is an object-oriented design pattern. A facade 
+			is an object that provides a simplified interface to a larger body
+			of code, such as a class library.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/facadepattern.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Facade</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="functor">
+		<glossterm>Functor</glossterm>
+		<glossdef>
+		<para>
+			In C++ context, functor is method implementing functional operator.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="gpl">
+		<glossterm>GPL - General public licence</glossterm>
+		<glossdef>
+		<para>
+			General public licence created by Free Software Foundation. The 
+			purpose of the GPL is to grant any user the right to copy, modify and 
+			redistribute programs and source code from developers that have chosen 
+			to license their work under the GPL. See <ulink url="http://en.wikipedia.org/wiki/GPL">GPL wiki</ulink> 
+			for more information. 
+			<ulink url="http://www.gnu.org/licenses/gpl.html">Licence</ulink>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="incremental_update">
+		<glossterm>Incremental update</glossterm>
+		<glossdef>
+		<para>
+			The contents of a PDF file can be updated incrementally without 
+			rewriting the entire file. Changes are appended to the end of the 
+			file, leaving its original contents intact. Each such incremental
+			update adds new cross reference section with trailer and so new
+			revision of document.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="indirect_object">
+		<glossterm>Indirect pdf object</glossterm>
+		<glossdef>
+		<para>
+			Any object in a PDF file may be labeled as an indirect object. This
+			gives the object a unique object identifier by which other objects 
+			can refer to it (for example, as an element of an array or as the 
+			value of a dictionary entry). The object identifier consists of two 
+			parts:
+			<itemizedlist>
+				<listitem>
+        			A positive integer object number. Indirect objects are often
+					numbered sequentially within a PDF file, but this is not 
+					required; object numbers may be assigned in any arbitrary 
+					order.
+				</listitem>
+				<listitem>
+        			A non-negative integer generation number. In a newly
+					created file, all indirect objects have generation numbers 
+					of 0. Nonzero generation numbers may be introduced when the 
+					file is later updated
+				</listitem>
+			</itemizedlist>
+			Together, the combination of an object number and a generation 
+			number uniquely identifies an indirect object. The object retains 
+			the same object number and generation number throughout its 
+			existence, even if its value is modified. 
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="invariant">
+		<glossterm>Invariant</glossterm>
+		<glossdef>
+		<para>
+			Invariant is a condition that is always true at a 
+			certain point in a program. In context of automatical 
+			testing, invariant defines expectation of behavior 
+			compared to real result of operation.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="iterator">
+		<glossterm>Iterator design pattern</glossterm>
+		<glossdef>
+		<para>
+			The Iterator pattern defines an interface that declares methods
+			for sequentially accessing the objects in a collection. A class
+			that accesses a collection only through such an interface remains
+			independent of the class that implements the interface.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/iteratorpattern.png" format="PNG"/>
+			  </imageobject>
+			  <caption><para>Iterator</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="linearized_pdf">
+		<glossterm>Linearized pdf document</glossterm>
+		<glossdef>
+		<para>
+			A Linearized PDF file is a file that has been organized in a special
+			way to enable efficient incremental access in a network environment. 
+			The file is valid PDF in all respects, and is compatible with all 
+			existing viewers and other PDF applications. Enhanced viewer 
+			applications can recognize that a PDF file has been linearized and 
+			can take advantage of that organization (as well as added hint 
+			information) to enhance viewing performance.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="observer">
+		<glossterm>Observer design patter</glossterm>
+		<glossdef>
+		<para>
+			The observer pattern (sometimes known as publish/subscribe) is a 
+			design pattern used in computer programming to observe the state 
+			of an object in a program. It is related to the principle of 
+			Implicit invocation.
+			<mediaobject>
+			  <imageobject align="center">
+				  <imagedata fileref="images/observerpattern.jpg" format="JPG"/>
+			  </imageobject>
+			  <caption><para>Observer</para></caption>
+			</mediaobject>
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="page_tree">
+		<glossterm>Pdf page tree</glossterm>
+		<glossdef>
+		<para>
+			Pdf stores all page dictionaries organized in so called page tree.
+			This tree distinguish 2 types of nodes:
+			<itemizedlist>
+				<listitem>
+					Intermediate tree node - this node's purpose is to collect
+					other nodes as a subtree. It is represented by <xref linkend="dictionary"/>
+					which contains element with <emphasis>Kids</emphasis> name
+					and which contains reference to <xref linkend="indirect_object"/>
+					of a node (this node can be either intermediate or page node.
+					Intermediate tree node dictionary contains element with 
+					<emphasis>Type</emphasis> name and this has to have
+					<emphasis>Pages</emphasis> value. To enable travirsing in
+					the tree, also <emphasis>Count</emphasis> element is
+					required for node's dictionary. This element holds number of
+					page tree nodes in current intermediate node.
+				</listitem>
+				<listitem>
+					Page (leaf) tree node - this node contains direct page
+					information. It is represented by page dictionary which has
+					element with <emphasis>Type</emphasis> name and
+					<emphasis>Page</emphasis> value.
+				</listitem>
+			</itemizedlist>
+			Root of the tree is referenced by <xref linkend="document_catalog"/>
+			dictionary as <emphasis>Pages</emphasis> element reference. 
+		</para>
+		<para>
+			With well balanced tree, it is possible to access arbitrary page
+			(also for very big amount of pages) in very short time (just fiew
+			hops through intermediate nodes). Pdf creators usually collects
+			pages in chunks in one intermediate node. Also intermediate nodes
+			are collected by 10. This means that document with 1000 pages has
+			page tree with 3 intermediate nodes.
+			<note>
+				Page tree root is allways intermediate node.
+			</note>
+		</para>
+		<mediaobject>
+		  <imageobject align="center">
+			  <imagedata fileref="images/page_tree.png" format="PNG"/>
+		  </imageobject>
+		  <caption><para>Page tree</para></caption>
+		</mediaobject>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="stream">
+		<glossterm>pdf stream</glossterm>
+		<glossdef>
+		<para>
+			A stream object, like a string object, is a sequence of bytes.
+			However, a PDF application can read a stream incrementally, 
+			while a string must be read in its entirety. Furthermore, 
+			a stream can be of unlimited length, whereas a string is subject 
+			to an implementation limit. For this reason, objects with 
+			potentially large amounts of data, such as images and page 
+			descriptions, are represented as streams.
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="trailer">
+		<glossterm>pdf trailer</glossterm>
+		<glossdef>
+		<para>
+			The trailer of a PDF file enables an application reading the file
+			to quickly find the cross-reference table and certain special 
+			objects. It is represented by dictionary and it is stored at the
+			file end. It contains entries for document root (<xref linkend="document_catalog"/>),
+			previous cross reference section and others (see Pdf specifiaction
+			section 3.4.4.).
+		</para>
+		</glossdef>
+	</glossentry> 
+	<glossentry id="wrapper">
+		<glossterm>Wrapper design patter</glossterm>
+		<glossdef>
+		<para>
+			A wrapper converts the interface of a class into another interface
+			clients expect. Wrappers let classes work together that couldn't 
+			otherwise because of incompatible interfaces.
+		</para>
+		</glossdef>
+	</glossentry> 
+</glossary>
+

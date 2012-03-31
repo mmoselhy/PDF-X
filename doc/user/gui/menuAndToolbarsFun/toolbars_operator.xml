@@ -1,0 +1,30 @@
+<sect2 id="gui_toolbars_operator" xreflabel="toolbar Operator">
+		<title>Operator</title>
+
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/toolbars_operator.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Toolbar - Operator</phrase>
+				</textobject>
+				<caption><para>Toolbar - Operator</para></caption>
+			</mediaobject>
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>Set color</term>
+				<listitem>See <xref linkend="gui_menu_setColor"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Set font</term>
+				<listitem>See <xref linkend="gui_menu_setFont"/>.</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Set line width</term>
+				<listitem>See <xref linkend="gui_menu_setLineWidth"/>.</listitem>
+			</varlistentry>
+		</variablelist>
+</sect2>

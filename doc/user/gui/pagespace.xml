@@ -1,0 +1,78 @@
+<chapter id="page_space">
+	<title>Page space</title>
+	<para>
+			The page space displayes one page from opened document. Page number is shown at the bottom of
+			displayed page, as is number of pages in document. On the right  the actual position of mouse cursor
+			on page in specified units is shown.
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/images/pagespace.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Page space design</phrase>
+				</textobject>
+				<caption><para>Page space design</para></caption>
+			</mediaobject>
+	</para>
+
+	<sect1 id="gui_pagespace_refresh" xreflabel="refreshing page">
+			<title>Changing page information</title>
+			<para>
+					There are two independent information in page space which must be actualized.
+			</para>
+			<para>
+					First is the image of the page itself and information about page count.
+					This part is updated only if someone calls script function
+					<emphasis>go()</emphasis> because it can be very slow (to update
+					page after each change could be a performance problem).
+					Reload page button in toolbars and menu (and many other useful
+					functions) call <emphasis>go()</emphasis> automatically.
+					But direct changes in <xref linkend="gui_objtreepropedit_id" />
+					and changes using scripting do not update the page and page count automatically.
+			</para>
+			<para>
+					The second is the mouse position on page. Position must be converted into 
+					internal coordinates. The position does not depend on zoom level
+					or actual rotation of page. (If the text starts at position
+					[x:6, y:7 cm] in 100% zoom the same position will be used to started the text
+					in 200% zoom.)
+					<para>
+							Notice: The most common way is to have the zero in the left-bottom edge of page and
+							to have the maximum in right-top edge.
+					</para>
+					
+			</para>
+			<para>
+					It can happen that after a zoom change the outer page space is not updated. 
+					To corret this call either script <emphasis>go()</emphasis> function or click the 
+					reload page button.
+			</para>
+	</sect1>
+	<sect1 id="gui_pagespace_popupmenu" xreflabel="popup menu for page space">
+			<title>Popup menu</title>
+			<para>
+					Right click of a mouse displayes a menu which will be displayed near the cursor.
+					You can choose from two functions
+					 <itemizedlist mark="opencircle">
+						<listitem><para><emphasis>Save page as image</emphasis></para></listitem>
+						<listitem><para><emphasis>Save selected area as image</emphasis></para></listitem>
+					  </itemizedlist>
+					 The latter one can be used only when a selection is already present.
+			</para>
+			<para>
+					Both functions store portion of viewed page to an image file.
+					Format of the image file is depending on the system and version of Qt.
+			</para>
+			<para>
+					<emphasis>Save page as image</emphasis> stores actual viewed page to an image file.
+					If only a part of a page is displayed, only the part of page is stored.
+			</para>
+			<para>
+					<emphasis>Save selected area as image</emphasis> stores only selected area.
+					If selected area is fragmented or has not a rectangle shape, then a bounding
+					rectangle of selected area is sotred. If selected area is bigger then actual displayed part of 
+					page, storing
+					area is cropped with same rectangle as page is cropped in <emphasis>Save page as image</emphasis>.
+			</para>
+	</sect1>
+</chapter>

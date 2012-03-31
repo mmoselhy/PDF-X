@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="test_boost"
+	ProjectGUID="{35DF7EFC-3789-4131-9242-58584C0F6A9B}"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+      InheritedPropertySheets="$(SolutionDir)\vsprops\base.vsprops;$(SolutionDir)\vsprops\release.vsprops;$(SolutionDir)\vsprops\win32.vsprops;$(SolutionDir)\vsprops\exe.vsprops"
+  		ConfigurationType="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+				CommandLine="echo &quot;PdfEdit -- testing $(ProjectName) availability&quot;"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				CommandLine="echo &quot;PdfEdit -- If NOT successful, please install $(ProjectName) properly.&quot;"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="echo &quot;PdfEdit -- $(ProjectName) available.&quot;"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<File
+			RelativePath=".\test_boost.cpp"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

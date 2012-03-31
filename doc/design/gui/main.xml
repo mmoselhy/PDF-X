@@ -1,0 +1,30 @@
+<!-- Description of gui design. All chapters specific for gui should be 
+     placed here. If description chapter (component) is written in separate 
+     file, entity has to be defined in design_doc.xml file (in entity 
+     declaration part)
+-->
+
+<part id="gui_part">
+<title>GUI design description</title>
+
+ <section id="gui_part_intro">
+  <para>
+   This part describes some basic principles of graphical user interface.
+   Described is menu settings system, used to manage menu and toolbar items, 
+   setting system, which is used to read, write, manage and watch settings
+   and defaults and the tree system, which is used to manage the object
+   treeview on right side of editor window.
+   Some of the principles (settings system) work also in commandline interface,
+   although there is one small difference - in comandline mode there is no
+   system to notify about changed setting, but it is also not necessary,
+   as there is no user interaction in that mode.
+  </para>
+ </section>
+
+&gui_menu;
+
+&gui_settings;
+
+&gui_tree;
+
+</part>

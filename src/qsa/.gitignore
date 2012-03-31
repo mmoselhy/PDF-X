@@ -1,0 +1,3 @@
+*.moc
+Makefile.qsa
+*.qmake.cache

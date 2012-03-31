@@ -1,0 +1,169 @@
+<sect1 id="gui_menu_View" xreflabel="menu item View">
+	<title>View</title>
+	<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/menu_view.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Default menu item - View</phrase>
+				</textobject>
+				<caption><para>Default menu item <emphasis>View</emphasis></para></caption>
+			</mediaobject>
+	</para>
+
+	<variablelist>
+		<title>View - description of items </title>
+
+		<varlistentry>
+			<term id="gui_menu_firstPage" xreflabel="first page">First page</term>
+			<listitem>
+				<para>
+						Show first page of viewed document.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.firstPage()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_prevPage" xreflabel="prev page">Prev page</term>
+			<listitem>
+				<para>
+						Show previous page of viewed document.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.prevPage()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_nextPage" xreflabel="next page">Next page</term>
+			<listitem>
+				<para>
+						Show next page of viewed document.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.nextPage()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_lastPage" xreflabel="last page">Last page</term>
+			<listitem>
+				<para>
+						Show last page of viewed document.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.lastPage()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_zoomIn" xreflabel="zoom in">Zoom in</term>
+			<listitem>
+				<para>
+						Zoom in the displayed page.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.zoomIn()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_zoomOut" xreflabel="zoom out">Zoom out</term>
+			<listitem>
+				<para>
+						Zoom out the displayed page.
+				</para>
+				<para>
+						Script equivalent: <emphasis>PageSpace.zoomOut()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_sh_commandline" xreflabel="show/hide commandline">Show/Hide commandline</term>
+			<listitem>
+				<para>
+						Show or hide command console (see <xref linkend="gui_layout"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>showHide("commandline","hideCmd")</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Show/Hide property editor</term>
+			<listitem>
+				<para>
+						Show or hide property editor (see <xref linkend="gui_layout"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>showHide("propertyeditor","hideProp")</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Show/Hide object tree</term>
+			<listitem>
+				<para>
+						Show or hide object tree (see <xref linkend="gui_layout"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>showHide("tree","hideTree")</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Show/Hide status bar</term>
+			<listitem>
+				<para>
+						Show or hide status bar (see <xref linkend="gui_layout"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>showHide("statusbar","hideStatus")</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Find text</term>
+			<listitem>
+				<para>
+						Find dialog for text search is executed. It searches text on current page.
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="gui/menuAndToolbarsFun/images/dialog_findText.png" format="PNG"/>
+							</imageobject>
+							<textobject>
+								<phrase>Search dialog</phrase>
+							</textobject>
+							<caption><para>Search dialog</para></caption>
+						</mediaobject>
+						This simple dialog allows us to search for all occurrences of text on actual page
+						and to select them.
+				</para>
+				<para>
+						Note:
+						 Usually the text structure (paragraphs, lines, words) is not kept.
+						 More words can create one operator or more operators can create one word.
+						 If the text is found the smallest possible operator is higlighted which can be
+						 bigger than searched text.
+				</para>
+				<para>
+						Script equivalent: <emphasis>findText()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</sect1>

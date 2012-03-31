@@ -1,0 +1,20 @@
+<sect2 id="gui_toolbars_revision" xreflabel="toolbar Revision">
+		<title>Revision</title>
+
+		<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/toolbars_revision.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Toolbar - Revision</phrase>
+				</textobject>
+				<caption><para>Toolbar - Revision</para></caption>
+			</mediaobject>
+		</para>
+
+		When a document is changed it can be saved either as new copy, to old file or to new revision. The last option
+		saves all changes made to the document. The history of changes is embedded in the document itself. We can choose
+		which revision we want to have displayed. Only the last revision can be edited. Otherwise we have to save it before
+		editing.
+</sect2>

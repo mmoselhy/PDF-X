@@ -1,0 +1,548 @@
+PDFedit readme
+==============
+
+TOC
+===
+License
+Contact
+Prerequisites
+	Base (kernel), pdfedit-core-dev package
+	Tests
+	Gui
+Documentation
+Configuration
+	Configure features
+	Libraries and binaries specification
+	Installation directories
+Compilation
+Installation
+Cygwin build
+FreeBSD build
+NetBSD installation
+Debian package
+RPM based distros
+Gentoo package
+Altlinux 64b
+PDFedit devel package
+
+
+License
+=======
+PDFedit is distributed under terms of GNU GPL in version 2.
+See doc/LICENSE.GPL for full license text.
+See doc/AUTHORS for full list of authors and contributors.
+For other more detailed documentation, look into "doc" subdirectory.
+File doc/user/user_doc.html contain more detailed installation instructions
+(in the Installation section) and list of required libraries.
+
+
+Contact
+=======
+Feel free to contact us with any question via our public
+pdfedit-support@lists.sourceforge.net mailing list. Note that you have to 
+be subscribed if you want to post messages to the list (subscription form
+is at https://lists.sourceforge.net/lists/listinfo/pdfedit-support).
+Mailing list archive is public visible also without registration. Please 
+try to look into the archive before you post your question and append 
+an existing thread rather than create a new one.
+
+If you want to be informed about important news you can register to the 
+pdfedit-news@lists.sourceforge.net mailing list. You can subscribe at
+https://lists.sourceforge.net/lists/listinfo/pdfedit-news
+
+All public mailing lists are listed at
+http://sourceforge.net/mail/?group_id=177354
+
+
+Prerequisites
+=============
+Base (kernel), pdfedit-code-dev package
+---------------------------------------
+Boost libraries must be installed. See detailed description about configure
+parameters if you have some unusual installation.
+Freetype library is almost necessary, because nearly all PDFs use these fonts.
+T1 font library is also recommended.
+
+Tests
+-----
+Our tests are based on CPPUNIT library, so it has to be present on your 
+system. See detailed description about configure parameters if you have 
+some unusual installation.
+
+Tools
+-----
+All tools use boost-program-options library so it has to be installed on your
+system if you want to compile them (see later how to enable them). Some
+distributions use a separate package (e.g. Debian) but most others include
+it directly into boost package.
+add_image tool uses libpng and its headers so libpng-dev package has to be 
+installed.
+
+Gui
+---
+Make sure you have all needed libraries (qt3, boost and xlib) along with their 
+headers. 
+You also need the environment variable QTDIR to be set to directory in which 
+the Qt toolkit (version 3) is installed. Many distributions already set this 
+when installing Qt, but some of them don't. In that case, you have to set the 
+QTDIR manually. Usually it is set to something like /usr/qt/3 or /usr/share/qt3
+(use e. g. export QTDIR=/usr/share/qt3 to set the variable if this is your 
+case).  
+Also, while usually not needed, QMAKESPEC may be set to match your system type.
+For most systems it is unnecessary to set it, although it may be needed if you
+cross-compile (like producing i386 binaries on amd64 platform) or in some rare
+configurations. Once you set QTDIR, you may try typing "ls $QTDIR/mkspecs".
+QMAKESPEC should be set to name of one of the directories that are in mkspecs
+subdirectory in the Qt directory.
+See http://www.digitalfanatics.org/projects/qt_tutorial/chapter04.html or 
+http://doc.trolltech.com/3.0/qmake-guide.html for more information.
+QTDIR is used also for qmake (tool for generating makefiles from QT project
+files) detection. By default, this is stored somewhere under QTDIR directory
+(typically QTDIR/bin/), but there are also platforms, where this is not 
+exactly true. If you have such a platform, try to use --with-qmake-dir
+parameter to configure (see bellow)
+
+Documentation
+=============
+There are 3 levels of documentation in this project.
+* Basic - in the form of the man page which is always installed 
+* doxygen - programming documentation extracted from sources and
+	    processed by doxygen tool. Obviously, doxygen has to
+	    be installed.
+	    This documentation is not created and installed by
+	    default and you have to explicitly enable it by
+	    --enable-doxygen-doc parameter to ./configure
+	    Result documentation is placed in the DOC_PATH/doxygen
+	    directory (DOC_PATH is PREFIX/share/doc/pdfedit)
+	    It is strongly recommended for pdfedit-core-dev package
+	    done by distributors.
+* user manual - html pages with user manual about PDFedit usage.
+	    This documentation is not created by default and you
+	    have to enable it by configure parameter
+	    --enable-user-manual. We are using xml based docbook
+	    format, so you have to have docbook xsl and xsltproc
+	    installed. 
+	    Result documentation is placed in the DOC_PATH/manual
+	    directory.
+* advanced - design documentation which describes inner data 
+	    structures, algorithms and relations from the 
+	    programmer perspective. This one is useful if you
+	    want to develop PDFedit or 3rd party application based
+	    on PDFedit.
+	    This documentation is not created by default too and
+	    you have to enable it by configure parameter 
+	    --enable-advanced-doc. We are using xml based docbook
+	    format, so you have to have docbook xsl and xsltproc
+	    installed. 
+	    Result documentation is placed in the DOC_PATH/design/
+	    directory.
+
+Configuration
+=============
+ Run:
+  ./configure [parameters]
+
+NOTE for those who use sources from CVS. configure is NO MORE part of the
+CVS tree!!! You have to generate it. This can be done simply by
+$ autoconf
+in the root of the checkout project. Note that you have to have autoconf
+package installed on your machine.
+
+Simple run without any parameter results in default configuration where 
+application is compiled in release mode (optimizations turned on, debug
+symbols are not present, compilation warnings are eliminated), GUI is
+enabled, doxygen documentation is generated, no kernel tests (stored in 
+src/kernel/tests/) are compiled and application will be installed into the
+/usr/local/pdfedit directory.
+
+Configuration enables also compilation and installation in so called
+pdfedit-core-dev package which prepares all libraries and header files for
+3rd party application which want to reuse our core (kernel) functionality 
+(see more in the Pdfedit devel package bellow).
+This is not done by default and you have to enable it explicitly by
+--enable-pdfedit-dev-core configure parameter.
+Note that development package and gui can be mixed together but also single
+dev. package can be created by disabling gui (see bellow).
+pdfedit-dev-core installation comes with pdfedit-core-dev-config script
+which can be used by 3rd party code for its configuration to correctly set
+compiler flags include paths, libraries and so on.
+
+Configure features
+------------------
+You can change this behavior with following parameters (feature is used
+if --enable- prefix is used, contrary --disable- prefix turns off this
+feature - e.g. if feature name stack-protector => --enable-stack-protector 
+uses this feature):
+	-stack-protector - adds stack protector parameter to the compilation
+	 flags. Disabled by default, because not all compilers support this
+	 feature (gcc > 4.1 supports it)
+
+	-release - controls compilation flags for release mode (no debugging
+	 needed). This is used by default. It means that optimizations are
+	 turned on, debug information is not included in the result binary.
+	 If you want to debug or do some development, --disable-release is
+	 strongly recommended.
+
+	-debug-info - if --enable-release is used and you still need debug
+	 information (e.g. when application crashes to have some reasonable
+	 stack traces) use --enable-debug-info. This parameter feature would
+	 be ignored if --disable-release is used.
+	
+	-observer-debug - just for developers only. Disabled by default. If
+	 turned on, some more debug information is added to the kernel code
+	 to enable debugging observers based code.
+
+	-gui - Creates GUI for PDFedit (pdfedit binary). Enabled by default. 
+	 If --disable-gui is used, no GUI (no pdfedit binary is created).
+	
+	-kernel-tests - Compiles all kernel tests (in src/kernel/tests). 
+	 Disabled by default and intended for developers/testers only. Note
+	 that this requires to have CPPUNIT installed on your system.
+
+	-tools - Compiles all tools which are available in src/tools.  Disabled
+	 by default and intended for those interested in simple examples of
+	 pdfedit-core-dev library usage and those who need some simple tools for
+	 pdf manipulation/analyzes and don't want to use GUI or scripting
+	 (pdf_to_text, flattener, delinerizator, pdf_object_comparer, etc.).
+	 Note that you need also --enable-pdfedit-core-dev for tools.
+	
+	-doxygen-doc - generates also doxygen documentation useful for 
+	 programmers. Disabled by default. Note that doxygen has to be
+	 installed for this feature.
+
+	-user-manual - generates also docbook user manual documentation.
+	 Disabled by default. Note that docbook and its prerequisites
+	 have to be installed for this feature.
+
+	-advanced-doc - generates also docbook design documentation.
+	 Disabled by default. Note that docbook and its prerequisites
+	 have to be installed for this feature.
+	
+	-pdfedit-core-dev - generates libraries needed for 3rd party
+	 applications which want to use pdfedit kernel core. Moreover 
+	 make install will install also header files, libraries and
+	 pdfedit-core-dev-config helper script (see Installation directories
+	 bellow). This option is disabled by default.
+	-poratability-flags - adds compiler flags which force c99/c++98 
+	 standard and posix/ansi portability. This option is enabled by default.
+
+Default configuration process will check for the number of CPUs/cores and 
+use this value for make jobs parallelization (each make will use different
+CPU/core). You can change this behavior with --with-parallel-make=VALUE 
+where VALUE is one of the:
+	- auto (default) - (on Linux - checks /proc/cpuinfo and use the CPU
+	  counts for the number of parallel make jobs).
+	- off - no parallelization
+	- number - the number of parallel make jobs (positive number
+	  expected)
+Default behavior (no need for --with-parallel-make parameter) should be OK
+in almost all situations (with benefit of shorter built time), however if 
+you have specific requirements when you don't want/can't use all your
+CPUs/cores for compilation you can use either off or precise number of
+parallel jobs.
+
+
+Libraries and binaries specification
+------------------------------------
+You can also control search paths for required libraries and binaries:
+
+	- Freetype2 font library
+	./configure --with-ft-prefix=PATH_TO_YOUR_FREETYPE2
+	resp. (for T1)
+	
+	- T1 font library
+	./configure --with-t1-includes=PATH_TO_YOUR_T1_HEADERS \
+		--with-t1-library=PATH_TO_YOUR_T1_LIB
+	
+	- CPPUnit
+	./configure  --with-cppunit-prefix=PATH_TO_YOUR_CPPUNIT
+
+	- Boost
+	./configure --with-boost=YOUR_BOOST_INSTALLATION_PATH \
+		--with-boost-libdir=YOUR_BOOST_LIB_PATH 
+
+	- qmake is searched in $QTDIR/bin, /usr/bin, /usr/local/bin,
+	  /usr/lib/qt3/bin and in directories in $PATH. If you have
+	  qmake installed in other directory, use:
+	./configure --with-qmake=QMAKE_BINARY_WITH_PATH
+
+	- QT comes with lrelease binary which is used for 
+	  localization data files translation. This binary is
+	  searched in $QTDIR/bin, /usr/bin, /usr/local/bin,
+	  /usr/lib/qt3/bin and in directories in $PATH.
+	  If it is not found on your system, please use
+	./configure --with-lrelease-bin=LRELEASE_BINARY_WITH_PATH
+
+	- doxygen is searched in /usr/bin , /usr/local/bin and 
+	  current PATH directories. If you have doxygen installed
+	  in other directory, use:
+	./configure --with-doxygen=DOXYGEN_BINARY_WITH_PATH
+
+	- xsltproc is  searched in /usr/bin , /usr/local/bin and 
+	  current PATH directories. If you have xsltproc installed
+	  in other directory, use:
+	./configure --with-xsltproc=XSLTPROC_BINARY_WITH_PATH
+
+	- docbook xslt files are necessary for xsltproc to generate
+	  correct output from docbook xml files. There are many
+	  places where these files can be found. As many systems
+	  use different directories and there is no general way
+	  to detect, we are using file doc/tools/docbook_xslt_paths
+	  to define all possible directories which are searched.
+	  If you are sure that you have installed package with
+	  this file (usually stored ...html/dobook.xsl) add its 
+	  absolute path  to this file (each directory should be on the 
+	  separate line and can use wildchars). If you report missing 
+	  directory for your platform, we can add it in the next release.
+
+See ./configure --help for more information about this parameters.
+
+Installation directories
+------------------------
+All files are by default installed under /usr/local subdirectory (binary
+into /usr/local/bin, config files into /usr/local/share/pdfedit etc.).
+This location can be changed by --prefix parameter to configure (PREFIX
+in the following).
+
+PDFedit binary location can be controlled by --exec-prefix (EPREFIX in
+the following) and it is stored under EPREFIX/bin. EPREFIX is the
+same like PREFIX by default.
+
+Documentation files are copied to PREFIX/share/pdfedit/doc, configuration
+files and scripts are copied to PREFIX/share/pdfedit and man page is
+copied to PREFIX/share/man/man1.
+
+If pdfedit-core-dev is configured, all relevant header files are copied into
+INCLUDEDIR/pdfedit-version (INCLUDEDIR=PREFIX/include by default), static
+libraries are copied into LIBDIR/pdfedit-version (LIBDIR=EPREFIX/lib by
+default) and pdfedit-core-dev-config script copied into the binary path as
+described for PDFedit bunary.
+
+If you need to change installation root (e. g. if you are packager and
+want to create package or use chrooted environment) use
+	--with-root-dir=YOUR_INSTALLATION_ROOT_DIR
+Everything will then be installed with complete directory structure relative
+to that directory instead of real root directory (using correct PREFIX and
+EPREFIX of course). Note that you cannot just execute PDFedit from that
+directory straight away, as the files must be present in real root directory
+for editor to function properly.
+If you want just to move the installation elsewhere (in your home directory,
+for example), use --prefix parameter for that.
+
+Installation directories for specific parts (binary, documentation, 
+configuration files) can be also controlled by configure parameters.
+	--bindir controls directory where the pdfedit binary is copied
+	--libdir controls directory where the pdfedit-core-dev libraries are
+	  installed
+	--includedir controls directory where the pdfedit-core-dev header
+	  files are installed
+	--docdir controls directory where documentation is copied
+	--mandir controls directory where the man page is copied. Note that
+	  we provide only man 1 pdfedit, so that man page is actually copied
+	  under man1 sub-directory under specified one.
+	--datadir controls directory where configuration files are stored
+	  (files are actually stored in pdfedit package name subdirectory)
+
+You can use following variables if you want to customize above directories:
+	prefix - value set as --prefix (usually /usr/local)
+	exec_prefix - value set as --exec_prefix (usually same as PREFIX)
+	datarootdir - root directory for all pdfedit data (usually PREFIX/share)
+	version - current version
+	package_name - installed package name
+
+Example for multiple simultaneous versions installation:
+	# Note that quotes are necessary here because bash (and some other 
+	# shells may too) would run subshell for $(expression)  otherwise
+	# Also note that man page will be overwritten by each installation.
+	./configure --bindir='$(exec_prefix)/$(package_name)-$(version)' \
+		--docdir='$(datarootdir)/doc/$(package_name)-$(version)' \
+		--datadir='$(datarootdir)/$(package_name)-$(version)' 
+
+
+Compilation
+===========
+
+After configure successfully finishes, run "make" in this directory to start
+compilation (note that GNU make is preferred bacause we are using some GNU
+make features which might be not available with other make implementations).
+
+If you need (for what ever reason) to change or explicitly specify other than
+default compiler, you can do it during configuration phase by passing your
+compiler as CC and CXX configure parameters. The first one stands for c files 
+compiler while the second is used for c++ files.
+Lets say that we have gcc v 4.2 as default and want to compile with the newest
+gcc 4.3. Then you should do something like (name of compiler binary may
+vary on different systems - this one is for Debian):
+	./configure CC=gcc-4.3 CXX=g++-4.3
+
+Note that CFLAGS and CXXFLAGS which can be standardly passed to configure
+are ignored by our configure script.
+
+However you can influence compiler parameters with the following variables:
+	- ARCH for architecture specific parameters
+	- C_EXTRA for CC flags
+	  (-fmessage-length=0 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing will
+	  be used if not defined)
+	- CXX_EXTRA for CXX flags
+	  (-fmessage-length=0 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -fexceptions 
+	  will be used if not defined)
+	- EXTRA_UTILS_CFLAGS, EXTRA_KERNEL_CFLAGS, EXTRA_TESTS_CFLAGS, EXTRA_XPDF_CFLAGS 
+	  used for CC flags for utils resp. kernel resp. tests directory (only
+	  for internal/developers usage)
+	- EXTRA_UTILS_CXXFLAGS, EXTRA_KERNEL_CXXFLAGS, EXTRA_TESTS_CXXFLAGS,
+	  EXTRA_GUI_CXXFLAGS, EXTRA_XPDF_CXXFLAGS same like the above for CXX
+
+Installation
+============
+ To install editor, run
+  make install
+
+Note that all files will be installed according to defined prefix and 
+if --with-root-dir was specified for configure, then prefix is relative 
+to the specified root.
+
+Cygwin build
+============
+PATH in cygwin must contain these three directories
+/bin			(most required executables are stashed here)
+/usr/X11R6/bin		(some libraries are here)
+/usr/lib/qt3/bin	(qmake must be in PATH)
+
+You can use cygwin_build.bat to start the build process (you will need 
+to set CYGWIN_ROOT in the file first). This will create the package in 
+/tmp/pdfedit-package and create pack.bat to pack the package with 7-zip
+
+Please note that we have received reports about PDFedit failing to compile
+under some Cygwin releases. The problem turned out to be related to 
+implementation of c++ standard wrt. to some functions definitions (e.g. mkstemp)
+under Cygwin.
+The only reasonable solution is turning off portability and c/c++ standards
+compiler flags. Please use --enable-portability-flags=no if you encounters
+these problems.
+
+
+FreeBSD build
+=============
+Here is the short howto for PDFedit compilation and installation on FreeBSD 6.2 
+(Qt 3.38, Xorg 7.2). Thanks to Hao Chen.
+
+# untar current sources (this was done for 0.3.1 version)
+tar zxvf pdfedit-0.3.1.tar.bz2
+cd pdfedit-0.3.1
+setenv QTDIR /usr/local
+setenv QMAKESPEC /usr/local/share/qt/mkspecs/freebsd-g++
+setenv LOCALBASE /usr/local
+./configure  --with-t1-library="${LOCALBASE}/lib" \
+	--with-t1-includes="${LOCALBASE}/include"
+
+#make sure you see this:
+#checking for T1_InitLib in -lt1... yes
+#using t1 library
+
+Our makefiles use some extensions of GNU make, so it is recomended to use
+gmake instead!
+
+NetBSD installation
+===================
+Package for NetBSD is available on http://pkgsrc.se/wip/pdfedit
+
+
+Debian package
+==============
+The package for the Debian is in testing branch at the moment. 
+See http://packages.debian.org/unstable/utils/pdfedit
+
+The package for the Ubuntu can by found at 
+http://packages.ubuntu.com/gutsy/utils/pdfedit
+
+And if you want to create deb package by your self, Eric Doviak 
+(thanks for this howto) suggests:
+
+First, install the packages necessary to build PDF Editor.
+
+# apt-get install dh-make libboost-dev 
+
+Then, download the tarball from Sourceforge and extracted the files:
+
+$ tar -zxf pdfedit_0.4.1.tar.gz
+
+Next, enter the pdfedit-0.4.1/ directory and run dh_make
+
+$ cd pdfedit-0.4.1/
+$ dh_make --createorig
+
+Choose to create a single binary. After running dh_make, open the
+pdfedit-0.4.1/debian/rules file and comment out (#) line 48:
+
+# $(MAKE) distclean
+
+Then, run:
+
+$ export QTDIR=/usr/share/qt3
+$ dpkg-buildpackage
+
+That creates the DEB package that you can install with:
+
+# dpkg -i pdfedit_0.4.1-1_i386.deb
+
+
+RPM based distros
+=================
+* OpenSUSE provides package via the Packman repository
+  (http://ftp.skynet.be/pub/packman/suse/10.3/)
+  Build service access - https://build.opensuse.org/package/show?package=pdfedit&project=KDE%3AKDE3
+* Package for Mandriva can be obtained from http://rpmlinux.org
+
+Gentoo package
+==============
+Package is available on sunrise overlay repository
+which should be available in following way:
+
+emerge -va layman
+echo "source /usr/portage/local/layman/make.conf" >> /etc/make.conf
+layman -f -a sunrise
+
+pdfedit is then installed by:
+ACCEPT_KEYWORDS=~x86 emerge -av pdfedit
+
+Altlinux 64b
+============
+Altlinux has boost libraries stored in /usr/lib64 directory. This
+directory is not searched by default. Therefore you have to set 
+library path by hand with --with-boost-libdir=/usr/lib64.
+
+
+PDFedit devel package
+=====================
+PDFedit core functionality (read as non-gui) can be reused by 3rd party
+applications. For this purpose, we have provided separate configuration
+options and installation targets as described above.
+If you want to use this package following steps are required:
+* install pdfedit-core-dev package (either from distribution package if
+  available or from sources as described above).
+* There are two possibilities to properly setup compiler and linker flags
+  to compile your application correctly.
+  - manual Makefile way
+    You should use EPREFIX/pdfedit-core-dev-config script 
+	e.g. this way in Makefile:
+	CXXFLAGS = $(shell pdfedit-core-dev-config --cflags)
+	LDFLAGS = $(shell pdfedit-core-dev-config --libs)
+
+  - autoconf way
+    pdfedit source package comes with the config/pdfedit-core-dev.m4 autoconf
+    macro file which exports AX_PDFEDIT_CORE_DEV macro. Just call it and use
+    the exported variables PDFEDIT_CORE_DEV_CPPFLAGS and PDFEDIT_CODE_DEV_LDFLAGS 
+    in your Makefile. Read more about possible parameters directly in the file.
+* update your sources which are using pdfedit-core-dev:
+	- initialize library by:
+	if(pdfedit_core_dev_init())
+	{
+		// Fatal error in initialization
+		exit();
+	}
+	before you call any PDFedit related code
+	- cleanup library stuff at the end when pdfedit-core-dev is no
+	  longer used by:
+	pdfedit_core_dev_destroy();
+        [See doxygen documentation for these functions for more information]
+

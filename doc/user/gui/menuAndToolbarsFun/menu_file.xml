@@ -1,0 +1,121 @@
+<sect1 id="gui_menu_File" xreflabel="menu item File">
+	<title>File</title>
+	<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/menu_file.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Default menu item - File</phrase>
+				</textobject>
+				<caption><para>Default menu item <emphasis>File</emphasis></para></caption>
+			</mediaobject>
+	</para>
+
+	<variablelist>
+		<title>File - description of items </title>
+
+		<varlistentry>
+			<term id="gui_menu_open" xreflabel="open file">Open...</term>
+			<listitem>
+				<para>
+					Close currently opened docuement (if it is changed, shows question
+					dialog whether we want to save changes) and displays open file dialog. If file
+					is selected and contains correct pdf document, it is opened in current window.	
+				</para>
+				<para>
+						Script equivalent: <emphasis>func_load()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_save" xreflabel="save file">Save</term>
+			<listitem>
+				<para>
+					Saves changes for current document. This changes will appear as new
+					revision after document is closed. Repeating save action will update previous
+					Save calls. If you whant to close bunch of changes and stores them as new
+					revision use <link linkend="gui_menu_save_new_revision">Save new revision </link>. This will allow you to conserve
+					previous changes and continue in new bunch of changes.
+				</para>
+				<para>
+						Script equivalent: <emphasis>func_save()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Copy revision</term>
+			<listitem>
+				<para>
+					Saves copy of the current document in the selected revision (TODO link). This
+					feature is very usefull if you want to make changes for older revisions. This
+					is normally not possible, because pdf documents doesn't support revision
+					branching. So you can select desired revision and then use Save copy to create
+					new pdf file, which contains everything up to selected revision. This file can
+					be then opened and manipulated as usual.
+				</para>
+				<para>
+					Please note that this function doesn't save any changes made on top of the
+					latest revision as they are not technically a part of this revision (changes 
+					will form a new revision after they are saved by save new revision).
+				</para>
+				<para>
+						Script equivalent: <emphasis>func_savecopy()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_save_new_revision">Save new revision</term>
+			<listitem>
+				<para>
+					This is same as Save except that changes are closed and forms new
+					revision which is definitivelly written to the file. All changes made after
+					doesn't	affect saved revision and goes to the currently newest one (as usual).
+				</para>
+				<para>
+						Script equivalent: <emphasis>func_saverev()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>New window</term>
+			<listitem>
+				<para>
+						Open new window of PDFedit.
+				</para>
+				<para>
+						Script equivalent: <emphasis>newwindow()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_closeWindow" xreflabel="close window">Close window</term>
+			<listitem>
+				<para>
+						Close actual window of PDFedit. If the document is changed allows saving the changes.
+				</para>
+				<para>
+						Script equivalent: <emphasis></emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Quit</term>
+			<listitem>
+				<para>
+						Close all windows of PDFedit and quit.
+				</para>
+				<para>
+						Script equivalent: <emphasis>closeAll()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</sect1>

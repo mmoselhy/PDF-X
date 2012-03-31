@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+[
+
+<!-- Part entities declaration.
+     These should point to book part definitions (each describing specific book
+     part) included directly in this file. There is no problem to reference to 
+     these parts from each compomenet. 
+-->
+<!ENTITY purpose	SYSTEM	  "purpose.xml">
+<!ENTITY general	SYSTEM	  "general.xml">
+<!ENTITY gui		SYSTEM	  "gui/main.xml">
+<!ENTITY cmdline	SYSTEM	  "cmdline/main.xml">
+<!ENTITY scripts	SYSTEM	  "scripts/scripting.xml">
+<!ENTITY scripts_nodoc	SYSTEM	  "scripts/scripting_nodoc.xml">
+<!ENTITY install	SYSTEM	  "install/install.xml">
+<!ENTITY glossary	SYSTEM	  "glossary.xml">
+
+<!-- Component entities definitions.
+     These should be included by part entities form concrete part. There is no 
+     problem to reference to these compomenets from other components. General 
+     convention is to keep following format:
+	part_chaptername
+-->
+<!ENTITY gui_menuAndToolbarsFun		SYSTEM    "gui/menuAndToolbarsFun/main.xml">
+<!ENTITY gui_settings				SYSTEM    "gui/settings.xml">
+<!ENTITY gui_command				SYSTEM    "gui/command.xml">
+<!ENTITY gui_pagespace				SYSTEM    "gui/pagespace.xml">
+<!ENTITY gui_objtreepropedit		SYSTEM    "gui/objtreepropedit.xml">
+
+<!ENTITY scripts_intro		SYSTEM	  "scripts/scripting_intro.xml">
+<!ENTITY scripts_startup	SYSTEM	  "scripts/scripting_startup.xml">
+<!ENTITY scripts_callbacks	SYSTEM	  "scripts/scripting_callback.xml">
+<!ENTITY scripts_objects	SYSTEM	  "scripts/scripting_objects.xml">
+
+<!ENTITY install_requiredlib	SYSTEM    "install/requiredlib.xml">
+<!ENTITY install_compiling		SYSTEM    "install/compiling.xml">
+<!ENTITY install_platforms		SYSTEM    "install/platforms.xml">
+
+<!ENTITY cmdline_description	SYSTEM    "cmdline/description.xml">
+<!ENTITY cmdline_localization	SYSTEM    "cmdline/localization.xml">
+
+<!ENTITY gui_settings_editor		SYSTEM    "gui/settings_editor.xml">
+<!ENTITY gui_settings_paths			SYSTEM    "gui/settings_paths.xml">
+<!ENTITY gui_settings_objecttree	SYSTEM    "gui/settings_objecttree.xml">
+<!ENTITY gui_settings_commandline	SYSTEM    "gui/settings_commandline.xml">
+<!ENTITY gui_settings_toolbars		SYSTEM    "gui/settings_toolbars.xml">
+<!ENTITY gui_settings_lookandfeel	SYSTEM    "gui/settings_lookandfeel.xml">
+
+<!ENTITY gui_menu			SYSTEM    "gui/menuAndToolbarsFun/menu.xml">
+<!ENTITY gui_menu_file		SYSTEM    "gui/menuAndToolbarsFun/menu_file.xml">
+<!ENTITY gui_menu_view		SYSTEM    "gui/menuAndToolbarsFun/menu_view.xml">
+<!ENTITY gui_menu_tools		SYSTEM    "gui/menuAndToolbarsFun/menu_tools.xml">
+<!ENTITY gui_menu_page		SYSTEM    "gui/menuAndToolbarsFun/menu_page.xml">
+<!ENTITY gui_menu_edit		SYSTEM    "gui/menuAndToolbarsFun/menu_edit.xml">
+<!ENTITY gui_menu_help		SYSTEM    "gui/menuAndToolbarsFun/menu_help.xml">
+
+<!ENTITY gui_toolbars					SYSTEM	"gui/menuAndToolbarsFun/toolbars.xml">
+<!ENTITY gui_toolbars_selectionModes	SYSTEM	"gui/menuAndToolbarsFun/toolbars_selectionModes.xml">
+<!ENTITY gui_toolbars_draw				SYSTEM	"gui/menuAndToolbarsFun/toolbars_draw.xml">
+<!ENTITY gui_toolbars_dynamic			SYSTEM	"gui/menuAndToolbarsFun/toolbars_dynamic.xml">
+<!ENTITY gui_toolbars_main				SYSTEM	"gui/menuAndToolbarsFun/toolbars_main.xml">
+<!ENTITY gui_toolbars_operator			SYSTEM	"gui/menuAndToolbarsFun/toolbars_operator.xml">
+<!ENTITY gui_toolbars_page				SYSTEM	"gui/menuAndToolbarsFun/toolbars_page.xml">
+<!ENTITY gui_toolbars_revision			SYSTEM	"gui/menuAndToolbarsFun/toolbars_revision.xml">
+<!ENTITY gui_toolbars_text				SYSTEM	"gui/menuAndToolbarsFun/toolbars_text.xml">
+<!ENTITY gui_toolbars_treeview			SYSTEM	"gui/menuAndToolbarsFun/toolbars_treeview.xml">
+
+<!ENTITY gui_onclickFunctions						SYSTEM    "gui/menuAndToolbarsFun/functions.xml">
+<!ENTITY gui_onclickFunctions_selectAll				SYSTEM    "gui/menuAndToolbarsFun/functions_selectAll.xml">
+<!ENTITY gui_onclickFunctions_selectGraphicalOp		SYSTEM    "gui/menuAndToolbarsFun/functions_selectGraphicalOp.xml">
+<!ENTITY gui_onclickFunctions_selectText			SYSTEM    "gui/menuAndToolbarsFun/functions_selectText.xml">
+<!ENTITY gui_onclickFunctions_selectAnnotations		SYSTEM    "gui/menuAndToolbarsFun/functions_selectAnnotations.xml">
+<!ENTITY gui_onclickFunctions_drawLine				SYSTEM    "gui/menuAndToolbarsFun/functions_drawLine.xml">
+<!ENTITY gui_onclickFunctions_drawRect				SYSTEM    "gui/menuAndToolbarsFun/functions_drawRect.xml">
+<!ENTITY gui_onclickFunctions_addText				SYSTEM    "gui/menuAndToolbarsFun/functions_addText.xml">
+<!ENTITY gui_onclickFunctions_strikeThrough			SYSTEM    "gui/menuAndToolbarsFun/functions_strikeThrough.xml">
+<!ENTITY gui_onclickFunctions_highlightingText		SYSTEM    "gui/menuAndToolbarsFun/functions_highlightingText.xml">
+
+<!ENTITY qsa_util	SYSTEM    "scripts/qsa-util.xml">
+<!ENTITY qsa_dialog	SYSTEM    "scripts/qsa-inputdialog.xml">
+
+<!-- Entities used generally in whole book. Entities may (and should) refer to 
+     term definition (definition of term should be defined in glossary part 
+     document - glossentry with id same as in xref tag).
+-->
+
+<!ENTITY version	SYSTEM	"version.xml">
+
+<!-- end of entities declaration -->
+]>
+
+
+<book>
+	<title>PDFedit user documentation</title>
+	<bookinfo>
+		<authorgroup>
+			<collab>
+				<collabname>PDFEdit Team</collabname>
+			</collab>
+			<author>
+				<firstname>Michal</firstname>
+				<surname>Hocko</surname>
+				<email>mstsxfx@gmail.com</email>
+			</author>
+			<author>
+				<firstname>Miroslav</firstname>
+				<surname>Jahoda</surname>
+				<email>vemem@email.cz</email>
+			</author>
+			<author>
+				<firstname>Jozef</firstname>
+				<surname>Misutka</surname>
+				<email>misutkajunior@hotmail.com</email>
+			</author>
+			<author>
+				<firstname>Martin</firstname>
+				<surname>Petricek</surname>
+				<email>martin@petricek.net</email>
+			</author>
+			<othercredit>
+				<firstname>Martin</firstname>
+				<surname>Beran</surname>
+				<email>beran@ms.mff.cuni.cz</email>
+				<contrib>Extensive technical help and project leader</contrib>
+			</othercredit>
+		</authorgroup>
+		<edition>User documentation version &version;</edition>
+		<pubdate>2006</pubdate>
+	</bookinfo>
+
+	&purpose;
+	&general;
+	&install;
+	&cmdline;
+	&gui;
+	&scripts_nodoc;
+<!--	&glossary; is empty -->
+
+</book>

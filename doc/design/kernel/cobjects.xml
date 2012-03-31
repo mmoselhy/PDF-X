@@ -1,0 +1,138 @@
+<sect1 id="kernel_part_cobjects">
+
+    
+  <title>Low level CObjects</title>
+  <para>
+  Pdf file consists of objects. These objects are referenced from a special structure forming a tree. 
+  Objects can be either simple (number, string, name, boolean value, reference, null) or 
+  complex (array, dictionary, stream).
+	 <para>
+		<mediaobject>
+		  <imageobject>
+                          <imagedata fileref="kernel/images/cobjectsexample.png" format="PNG"/>
+		  </imageobject>
+		  <caption><para>CObject class hierarchy</para></caption>
+		</mediaobject>
+	 </para>
+
+  </para>
+
+  <sect2 id="cobjects_general_description">
+	  <title>General description</title>
+	  <para>
+	  CObjects are objects in pdfedit which represent objects in pdf file.
+          All cobjects are derived from one base class <classname>IProperty</classname>. 
+	  Objects form a tree like structure so we can divide objects into single objects (leafs) and composite objects (nodes). This
+	  is an example of <xref linkend="composite" />. 
+	  This is a different approach to xpdf implementation where each pdf object is represented by the same huge class. 
+	  
+	  The concept of having exactly one class representing each pdf object leads to many problems:
+	  <itemizedlist mark="opencircle">
+		<listitem><para>inheriting - unclear oo design, unmanagable, it breaks the idiom of one entity for one purpose</para></listitem>
+		<listitem><para>adding changing operations - would result in even more monstrous class</para></listitem>
+		<listitem><para>sometimes value inside class, sometimes outside - unclear oo design</para></listitem>
+	  </itemizedlist>
+	  
+	  There are many interesting design decisions in xpdf objects implementation. 
+	  For example memory handling makes it almost unsound to delete objects from 
+          complex types. Memory allocation policy, that means who/when/how is to deallocate xpdf <classname>Object</classname> is a mess which could easily
+	  lead to either memory leaks or memory corruption.
+
+	  The new design counted with new object for each different pdf object. Because of the pdf decoding complexity (pdf can be encoded
+          using many filters) these objects use xpdf <classname>Object</classname> just for initializing and dispatching changes to <classname>CXref</classname> object.
+
+	  Objects can not be simply copied, because it is not clear if a copy is a deep copy with all indirect object copied or not.
+	  </para>
+	 
+	 <para>
+		<mediaobject>
+		  <imageobject>
+		   <imagedata fileref="kernel/images/iproperty.png" format="PNG"/>
+		  </imageobject>
+		  <textobject><phrase>Object class hierarchy</phrase></textobject>
+		  <caption><para>Object class hierarchy</para></caption>
+		</mediaobject>
+	 </para>
+	 
+  <sect3 id="cobjects_base_class">
+	  <title>Base class</title>
+	  <para>
+                  Every object is derived from one base class - <classname>IProperty</classname>. This base class is a hanger which can be used to 
+	  access child objects uniformly. This class is a read only interface for all properties.
+	  Objects can be created uninitialized or can be initialized from an xpdf Object of the same type and simple objects 
+	  cat be initialized directly from a value.
+	  </para>
+  </sect3>
+
+  <sect3 id="simple_objects">
+	  <title>Simple objects</title>
+	  <para>
+	  Simple objects are very similar. They share behaviour and because of this also method names (only value keeper is different). They are represented by one class
+          using c++ templates. One template class (<classname>CObjectSimple</classname>), parameterized by object type, represents all 7 types of simple objects.
+	  </para>
+  </sect3>
+  <sect3 id="complex_objects">
+	  <title>Complex objects</title>
+	  <para>
+	  It is more difficult with complex types. Each complex type must contain references to its children which are 
+	  also pdf objects. A design decision was made to use smart pointers for referencing child objects. The reasons are:
+	  <orderedlist numeration="arabic">
+	   <listitem>
+	    <para>Allocation and deallocation policy - we cannot be sure when an object is deallocated nobody 
+	    holds a pointer to the object. This could be solved by implementing reference counting, but why reimplement the wheel.
+	    </para>
+	   </listitem>
+	   <listitem> <para>Automatic deallocating when not needed.</para> </listitem>
+  	  </orderedlist>
+
+	  Pdf objects can be referenced using ids which are similar to pointers. This brings many problems. One of them is the
+	  impossibility to delete such objects. Many of the problems are automatically handled by smart pointers. 
+	  </para>
+		 <sect4 id="array_dict">
+			 <title>Array and dictionary</title>
+			  <para>
+                                  <classname>CArray</classname> stores its children in a simple container indexed by position. <classname>CDict</classname> stores its children 
+			  in container indexed by string which uniquely identifies a property. The beauty of smart pointers arise when deallocating
+			  an array, it automatically deallocates its children when not referenced and this is done recursively.
+			  </para>
+		 </sect4>
+
+		 <sect4 id="streams">
+			 <title>Streams</title>
+			  <para>
+			  Streams are the most complicated from all pdf objects. The problem is that xpdf can decode pdf files but it can 
+			  not do it the other way round. (it is because it never needs it) Xpdf impelementation of streams is very rough.
+			
+			  Each stream consists of a dictionary and stream buffer. The dictionary can not be accessed directly. 
+			  Dictionary interface is simulated by simple methods which delegate the calls to the dictionary object. 
+			  When a stream object is modified, we will drop all encoding filters (meaning that all filter relevant
+			  entries from dictionary are removed) and treat the stream data as uncompressed. Data are compressed
+			  later when we are writing stream to the file with the help of the FilterStreamWriter class hierarchy.
+			  </para>
+
+			  <sect5 id="accessing_streams">
+			  <title>Accessing streams</title>
+			  <para>
+			  We access streams using <xref linkend="adapter" /> implementing open/close interface. We need
+			  to be able to read from more streams byte per byte because content streams can be splitted anywhere. 
+			  We decided to return only xpdf objects. 
+			  </para>
+			  </sect5>
+		 </sect4>
+	</sect3>
+ </sect2>
+
+
+<sect2 id="changing_objects">
+	 <title>Changing objects</title>
+	  <para>
+                  Every object can be obtained from <classname>CXref</classname> (see <xref linkend="kernel_part_cxref"/>) when knowing its reference number and then changed using iproperty interface.
+	  Internal state of special object (cpage, ccontentstream, etc.) depends on these raw objects. 
+	  Therefore a mechanism was designed to allow special object to be notified about raw changes. Objects implement subject interface from
+	  Observer design pattern<xref linkend="observer" /> which allows everyone to register observers on these objects. 
+	  This observer gets notified each time the object was changed. 
+      </para>
+
+ </sect2>
+
+</sect1>

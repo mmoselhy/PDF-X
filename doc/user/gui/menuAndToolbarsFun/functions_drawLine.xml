@@ -1,0 +1,15 @@
+<sect3 id="gui_onclickFunctions_drawLine" xreflabel="mode to drawing line">
+		<title>Drawing lines</title>
+
+		<para>
+				Drawing lines is easy with this mode. First set default properties in the toolbar:
+				<xref linkend="gui_toolbars_foregroundColor"/>, <xref linkend="gui_toolbars_lineWidth"/>
+				and <xref linkend="gui_menu_dashStyle"/>. Then by pressing the mouse left button and dragging a line
+				is created. After releasing mouse button the line is drawn.
+				The line drawn during dragging is only informative. 
+				The viewed part of the page is updated after each added line.
+		</para>
+		<para>
+				To cancel line drawing press <emphasis>Esc</emphasis> key before releasing the mouse button.
+		</para>
+</sect3>

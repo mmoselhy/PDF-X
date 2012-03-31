@@ -1,0 +1,26 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<chapter id="kernel_part_interface_ch">
+	<title>Interface objects</title>
+	<para>
+		As descibed above, kernel comunicates with higher layers (see <xref	linkend="general_layers_ch"/>)
+		with objects called <emphasis>cobjects</emphasis>. Those
+		<emphasis>cobjects</emphasis> can be <emphasis>high level</emphasis> and
+		<emphasis>low level</emphasis>. This chapter and its sections
+		describe these objects, their responsibilities and mutual cooperation.
+	</para>
+
+	&kernel_cobjects;
+
+	&kernel_cpdf;
+
+	&kernel_cpage;
+
+	&kernel_cannotation;
+
+	&kernel_cxref;
+
+	&kernel_contentstream;
+
+	&kernel_pdfoperators;
+</chapter>

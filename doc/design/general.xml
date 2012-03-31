@@ -1,0 +1,20 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<part id="general_part">
+	<title>PDFEdit general overview</title>
+	<para>
+		This part describes general information about project internals. Which
+		technologies were used during design and implementation and which helper
+		(utils) classes were implemented as support for particular tasks.
+		Finally describes &xpdf_link_index; code reusage and modifications
+		neccessary to enable such usage.
+	</para>
+
+	&general_techn;
+	
+	&general_layers;
+
+	&general_utils;
+	
+	&general_xpdf;
+</part>

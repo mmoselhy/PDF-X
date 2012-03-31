@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="VSProps Debug"
+	>
+	<Tool
+		Name="VCBscMakeTool"
+		OutputFile="$(OutDir)/bsc/"
+	/>
+	<Tool
+		Name="VCCLCompilerTool"
+		Optimization="0"
+		PreprocessorDefinitions="_DEBUG;DEBUG"
+		RuntimeLibrary="1"
+		BrowseInformation="1"
+		BrowseInformationFile="$(OutDir)/bsc/"
+		DebugInformationFormat="3"
+		DisableSpecificWarnings="4290"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="msvcrtd.lib LIBCMTd.lib"
+		LinkIncremental="1"
+		IgnoreDefaultLibraryNames="LIBCMT.lib;msvcrt.lib"
+		GenerateDebugInformation="true"
+	/>
+	<Tool
+		Name="VCResourceCompilerTool"
+		PreprocessorDefinitions="_DEBUG"
+	/>
+	<Tool
+		Name="VCManifestTool"
+		VerboseOutput="true"
+	/>
+</VisualStudioPropertySheet>

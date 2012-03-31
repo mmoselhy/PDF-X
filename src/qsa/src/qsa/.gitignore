@@ -1,0 +1,6 @@
+Makefile
+qsconfig.h
+moc_qseditor.cpp
+moc_qsinterpreter.cpp
+moc_qsproject.cpp
+moc_qsscript.cpp

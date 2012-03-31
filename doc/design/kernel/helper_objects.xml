@@ -1,0 +1,22 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<chapter id="kernel_part_helper_ch">
+	<title>Kernel internal objects</title>
+	<para>
+	</para>
+
+	&kernel_pdfwriter;
+
+	&kernel_xrefwriter;
+
+	&kernel_filters;
+
+	&kernel_observers;
+
+	&kernel_modecontroller;
+
+	&kernel_progressobserver;
+
+	&kernel_stateupdater;
+
+</chapter>

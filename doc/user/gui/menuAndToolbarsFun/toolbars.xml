@@ -1,0 +1,20 @@
+<sect1 id="toolbars">
+	<title>Toolbars</title>
+	<para>
+		Toolbars are shortcut for functions found either in menu, or by right clicking on specific objects.
+		Menu items can be either in enabled or disabled state. Some operations have no effect when a document
+		is not open so they are disabled. Also some operations are not avaliable when specific objects from specific
+		windows are not selected.
+	</para>
+
+	&gui_toolbars_main;
+	&gui_toolbars_page;
+	&gui_toolbars_selectionModes;
+	&gui_toolbars_draw;
+	&gui_toolbars_text;
+	&gui_toolbars_operator;
+	&gui_toolbars_dynamic;
+	&gui_toolbars_treeview;
+	&gui_toolbars_revision;
+
+</sect1>

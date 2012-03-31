@@ -1,0 +1,52 @@
+<sect1 id="toolbars_menus_functions">
+		<title>Functions in menu and toolbars</title>
+		<para>
+				Following functions are called from menu and toolbars and provide
+				user friendly enviroment for simple editing.
+		</para>
+
+		<sect2 id="gui_onclickFunctions_selectionModes" xreflabel="selection modes">
+				<title>Selection modes</title>
+				<para>
+						Modes in this section can be used to select objects on the
+						displayed page. All modes support move and resize of selected objects, 
+						but the real functionality depends on implemented scripts, which perform
+						real action with selected objects (e.g. moving nongraphical
+						operators (text, pictures) and moving annotation activation rectangle,
+						but moving graphical operators (line, rectangle, ...) is not implemented).
+				</para>
+				<para>
+						When moving selected objects cursor must be in the selected
+						region (cursor pointer will change to cross from arrows pointer). After pressing 
+						the mouse left button selection region
+						can be moved. After releasing mouse left button script moving function is executed
+						on the selected operators.
+				</para>
+				<para>
+						When resizing objects cursor must be moved to the edge of bounding
+						rectangle of selected region (cursor will change to two arrow oriented from each
+						other direction - there are four possibilities how to resize: left-right, top-bottom,
+						(left-top)-(right-bottom) and (left-bottom)-(right-top)). After pressing the left
+						mouse button selected region is resized by cursor movement. Script function for
+						resizing is executed when mouse left button is released.
+				</para>
+				<para>
+						When cancelling started action press <emphasis>Esc</emphasis> key before releasing left mouse
+						button. 
+						If <emphasis>Esc</emphasis> key is pressed during no action all objects
+						on the page are unselected.
+				</para>
+				&gui_onclickFunctions_selectAll;
+				&gui_onclickFunctions_selectGraphicalOp;
+				&gui_onclickFunctions_selectText;
+				&gui_onclickFunctions_selectAnnotations;
+		</sect2>
+		<sect2 id="drawing_adding_new">
+				<title>Drawing and adding new objects</title>
+				&gui_onclickFunctions_drawLine;
+				&gui_onclickFunctions_drawRect;
+				&gui_onclickFunctions_addText;
+				&gui_onclickFunctions_strikeThrough;
+				&gui_onclickFunctions_highlightingText;
+		</sect2>
+</sect1>

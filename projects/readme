@@ -1,0 +1,71 @@
+Win32 pdfedit* release
+---------------------------
+The main purpose is to demonstrate the usage of the underlying pdfedit library. Currently, there are several tools which can be used from command line and a proof of concept for win32 GUI. 
+
+Pdfedit Win32 release is beta. It also means that all executables are compiled in debug mode and therefore are slower and bigger; however, the functionality is the same.  
+
+We use Visual Studio 2008 for building and CRT is statically linked. This means that no dll hell/incorrect runtime environment problems occur but there is significant file size overhead.
+
+Problems
+---------------------------
+Please, feel free to report any problems on pdfedit-support@lists.sourceforge.net or visit https://sourceforge.net/projects/pdfedit/ for more information.
+
+
+Step-by-step instructions on how to compile pdfedit on clean PC  
+---------------------------
+
+== pdfedit ==
+1. download the sources (already done when you read this)
+
+== VS 2008 ==
+2. download and install VS 2008! C++ Express Edition
+http://www.microsoft.com/express/Downloads/ 
+
+== boost ==
+3. install boost
+http://www.boostpro.com/download/
+- select 2008 compiler
+- select optional packages - programoptions  should be enough
+3.1 open VS Tools->Options->Projects and Solutions->VC++ Directories and add boost directory to 
+Include files: (e.g. c:\Program Files\boost\boost_1_44\)
+Library files: (e.g. c:\Program Files\boost\boost_1_44\lib\)
+4. try to build test_boost 
+if NOT  OK go to #3 and try again?
+if OK continue
+
+== zlib ==
+5. download e.g. zlib-1.2.5. sources and unpack it somewhere and
+http://www.zlib.net/
+5.1 open VS Tools->Options->Projects and Solutions->VC++ Directories and add boost directory to 
+Include files: (e.g. g:\private\work\projects\pdfedit\zlib\zlib-1.2.3\)
+6. build test_zlib
+if NOT  OK go to #5 and try again?
+if OK continue
+
+==freetype==
+7. download freetype and unpack it somewhere
+https://sourceforge.net/projects/freetype/files/freetype2/2.3.12/ft2312.zip/download
+7.1 open VS Tools->Options->Projects and Solutions->VC++ Directories and add boost directory to 
+Include files: (e.g. g:\private\work\projects\pdfedit\freetype\include\)
+8. build test_freetype2
+if NOT  OK go to #5 and try again?
+if OK continue
+
+==libpng==
+8. download png and create libraries libpng/libpngd
+the same process as above
+
+Select Platform/Configuration Debug-Win32 / Win32 and build it
+
+Troubleshooting
+---------------------------
+
+  1) problems with zlib/freetype:
+  
+  sol #1) if you want to compile it against library versions of zlib/freetype you have to use the same Runtime libraries (MT, MTd, ...). If you changed it you have to change it everywhere.
+  
+  sol #2) try to build those yourselves
+  
+  2) problems with gui.installer
+  download python, 7z and add it to PATH
+    

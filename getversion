@@ -1,0 +1,119 @@
+#!/bin/sh
+# PDFedit - free program for PDF document manipulation.
+# Copyright (C) 2006-2009  PDFedit team: Michal Hocko,
+#                                        Jozef Misutka,
+#                                        Martin Petricek
+#                   Former team members: Miroslav Jahoda
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program (in doc/LICENSE.GPL); if not, write to the 
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+# MA  02111-1307  USA
+#
+# Project is hosted on http://sourceforge.net/projects/pdfedit
+
+# This file controls current PDFedit version for whole build process.
+# We recognize two types of versions:
+#	- short - contains only VERSION (see bellow) and it is used for
+#		  package name and distribution directory names if we
+#		  want to distinguish different installations
+#	- full - contains VERSION[-RELEASE] and it is only as information
+#		 about built tree state in version strings and so on. This
+#		 should be used when reporting bugs.
+#
+# where
+#	VERSION - stands for the last upstream release (last tagged tree)
+#	RELEASE - stands for the commit on top of the last released.
+#		  no release is printed if we are at the tagged release.
+#		  if the tree contains some uncommitted changes then we add
+#		  -dirty suffix.
+#       example:
+#		 0.4.5-057a1ef[-dirty] 
+#
+# Released tarbal contains .scmversion file which contains full version with
+# release number
+#
+# Usage:
+# ./getversion [[v] [-r]|[-f]
+# where
+#	-v prints VERSION
+#	-r prints REVISION
+#	-f prints files (with full paths) examined for getting proper revision 
+#	   (all other parameters are ignored if this parameter is specified).
+#	   This can be used for dependency creation for files which directly
+#	   depend on generated revision
+#
+# Nothing is printed if no parameter is specified
+
+# Get back to the script location because of .scmversion and .git checks
+cd `dirname $0`
+
+if [ -f .scmversion ]
+then
+	PACKAGE_VERSION=`cat .scmversion`
+	PACKAGE_RELEASE=""
+elif [ -d .git ]
+then
+	FULL=`git describe`
+	PACKAGE_VERSION=`echo $FULL | cut -d'-' -f1`
+	if [ $FULL != $PACKAGE_VERSION ]
+	then
+		PACKAGE_RELEASE="-`git rev-parse --verify --short HEAD`"
+	fi
+
+	# Uncommitted changes
+	if [ `git diff-index --name-only HEAD | wc -l` -gt 0 ]
+	then
+		PACKAGE_RELEASE="${PACKAGE_RELEASE}-dirty"
+	fi
+else
+	echo "Eeeek neither a released archive nor a git tree" >&2
+	exit 1
+fi
+GETVERSION_DIR=`dirname $0`
+EXLUDE_FILES="version_exclude"
+
+cd $GETVERSION_DIR
+
+print_version()
+{
+	echo -n $PACKAGE_VERSION
+}
+
+print_release()
+{
+	echo -n "$PACKAGE_RELEASE"
+}
+
+CWD=`pwd`
+FIND="find src -type f \( -name '*.cc' -o -name '*.h' -o -name '*.qs' \) \
+	| grep -v -f $EXLUDE_FILES \
+	| sed 's@^@$CWD/@'"
+
+print_files()
+{
+	eval $FIND	
+}
+
+while [ $# -gt 0 ]
+do
+	case $1 in
+		-v ) PRINT_VERSION="1" ;;
+		-r ) PRINT_RELEASE="1" ;;
+		-f ) print_files; exit 0;;
+	esac
+	shift
+done
+
+[ -n "$PRINT_VERSION" ] && print_version
+[ -n "$PRINT_RELEASE" ] && print_release
+exit 0

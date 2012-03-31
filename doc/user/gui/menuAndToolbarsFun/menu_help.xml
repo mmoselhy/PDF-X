@@ -1,0 +1,63 @@
+<sect1 id="gui_menu_Help" xreflabel="menu item Help">
+	<title>Help</title>
+	<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/menu_help.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Default menu item - Help</phrase>
+				</textobject>
+				<caption><para>Default menu item <emphasis>Help</emphasis></para></caption>
+			</mediaobject>
+	</para>
+
+	<variablelist>
+		<title>Help - description of items </title>
+
+		<varlistentry>
+			<term>About</term>
+			<listitem>
+				<para>
+						Shows About dialog box.
+				</para>
+				<para>
+						Script equivalent: <emphasis>about()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Help</term>
+			<listitem>
+				<para>
+						Shows help dialog which includes
+					<itemizedlist mark="opencircle">
+					  <listitem><para>Commandline usage</para></listitem>
+					  <listitem><para>Keyboard shortcuts</para></listitem>
+					  <listitem><para>Scripting help</para></listitem>
+					  <listitem><para>Utility Framework documentation</para></listitem>
+					  <listitem><para>Input Dialog Framework documentation</para></listitem>
+					</itemizedlist>
+
+				</para>
+				<para>
+						Script equivalent: <emphasis>help()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Menu item from test plugin</term>
+			<listitem>
+				<para>
+						Menu item for debugging purposes.
+				</para>
+				<para>
+						Script equivalent: <emphasis>testplugin()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</sect1>

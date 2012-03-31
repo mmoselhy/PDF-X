@@ -1,0 +1,150 @@
+ <chapter id="tree_view">
+  <title>Object tree view</title>
+  <para>
+   Structure of PDF can be represented as a tree, and as such, it is shown in the treeview.
+   However, there are some problems:
+   <itemizedlist>
+    <listitem><para>
+     Many elements (such as page) are in the tree two or more times, often with different
+     representation (List of pages vs. complicated tree structure in Pages dictionary).
+     When you modify one of them, the others usually change in some way too.
+    </para></listitem>
+    <listitem><para>
+     The tree contain references (analogous to a symbolic link in unix filesystems) and
+     these references can contain cycles
+     (reference in tree A can point to tree B, while some other reference in tree B point to tree A).
+     In fact, the cycles are very common, for example page always have link to its
+     parent page dictionary in which it is contained.
+    </para></listitem>
+    <listitem><para>
+     Single item can be referenced multiple times from different parts of tree.
+     Common example are fonts, as one font is usually referenced in Resources dictionary on multiple pages.
+    </para></listitem>
+    <listitem><para>
+     The tree is very large. Even tree of very small file with single page contain
+     over 1000 items and huge documents (like the PDF specification for example,
+     which have 1236 pages) will have probably over one million tree items.
+     (as the tree items are branched to very detailed level,
+      basically to level of single words in most documents)
+     This is problem, partially because of memory taken by too many items,
+     and mainly, most users are unable to orient in such a large tree effectively.
+    </para></listitem>
+   </itemizedlist>
+  </para>
+  <sect1 id="MultiTreeWindow">
+   <title>MultiTreeWindow class</title>
+   <para>
+    Class providing tree view of PDF objects.
+    It does support multiple tabs, showing individual trees inside them.
+   <para>
+   </para>
+    Splitting the tree to multiple tabs partially solve the user disorientation problem,
+    as all content streams are opened in tabs, thus their operator tree does not clutter
+    the "main" tree view showing pages, annotations, outlines, etc ...
+   </para>
+   <para>
+    This window show list of tabs, with one "main" tab that contain the document as root element
+    and zero or more "secondary" tabs, than show some elements from main tree more in detail.
+    The main tree cannot be closed and is fixed to showing the PDF document as its root item.
+    Secondary trees can be closed any time when the user think they are no longer needed.
+   </para>
+   <para>
+    Single tree in the multi tree window is managed by TreeWindow class
+   </para>
+  </sect1>  
+  <sect1 id="TreeWindow">
+   <title>TreeWindow class</title>
+   <para>
+    Class providing tree view of PDF objects, having one object at root and showing its children.
+    It uses QListView for showing the tree and all items that are inside the QListView are derived
+    from TreeItemAbstract class (which is derived from ordinary QListViewItem class)
+    Also, the TreeWindow bring some limitation to the QListView in it, most notable, you can only
+    put items that are derived from TreeItemAbstract class, not ordinary QListViewItem
+    (if you bypass this limitation, you can expect strange behavior) and the listview must have
+    at most one root item - this is required by GUI logic that tree correspond to something,
+    either the document or some part of it (or the tree is empty).
+    Also, it simplifies some things.
+   </para>
+  </sect1>
+  <sect1 id="TreeItemAbstract">
+   <title>TreeItemAbstract class</title>
+   <para>
+    This class is inherited from basic QListViewItem, providing some extra functionality
+    (getting QObject wrapper from the treeitem with a getObject() method, managing childs of the treeitem and some
+    base methods to support automatically reloading only the necessary tree items when
+    change is detected)
+    All specific treeitems are derived from this class.
+    The methods needed to fill tree with child items (if any) are purely virtual (abstract).
+   </para>
+  </sect1>
+  <sect1 id="TreeItemAbstract.subclass">
+   <title>TreeItemAbstract subclasses</title>
+   <para>
+    <itemizedlist>
+     <listitem><para>
+      TreeItem - Base class for item wrapping boost::shared_ptr&lt;IProperty&gt;.
+      Every low-level object is derived from IProperty. This class is abstract.
+     </para></listitem>
+     <listitem><para><itemizedlist>
+       <listitem><para>TreeItemArray - 
+         Class wrapping boost::shared_ptr&lt;CArray&gt;.
+         Child items are array elements.
+       </para></listitem>
+       <listitem><para>TreeItemCStream - 
+         Class wrapping boost::shared_ptr&lt;CStream&gt;.
+         Child items are properties from the stream dictionary.
+       </para></listitem>
+       <listitem><para>TreeItemDict - 
+         Class wrapping boost::shared_ptr&lt;CDict&gt;.
+         Child items are dictionary properties.
+       </para></listitem>
+       <listitem><para><itemizedlist>
+         <listitem><para>TreeItemOutline - 
+           Class wrapping boost::shared_ptr&lt;COutline&gt;.
+           COutline is basically a CDict with few extra methods.
+         </para></listitem>
+       </itemizedlist></para></listitem>   
+       <listitem><para>TreeItemRef - 
+         Class wrapping boost::shared_ptr&lt;CRef&gt;.
+         Child item is the reference target.
+       </para></listitem>
+       <listitem><para>TreeItemSimple - 
+         Class wrapping shared pointer to one of the simple types (CInt, CReal, CBool, CName, CString).
+         Simple types have no child items.
+       </para></listitem>
+     </itemizedlist></para></listitem>   
+     <listitem><para>TreeItemAnnotation - 
+       Class for tree item wrapping boost::shared_ptr&lt;CAnnotation&gt;.
+       CAnnotation is high-level object representiing annotation in a document.
+     </para></listitem>
+     <listitem><para>TreeItemContentStream - 
+       Class for tree item wrapping boost::shared_ptr&lt;CContentStream&gt;.
+       Child items are top-level PDF operators from the content stream.
+     </para></listitem>
+     <listitem><para>TreeItemOperatorContainer - 
+       Class for tree item wrapping arbitrary vector with PDF operators.
+       This is used mainly for displaying selected PDF operators in the tree.
+     </para></listitem>
+     <listitem><para>TreeItemPage - 
+       Class for tree item wrapping page in document (boost::shared_ptr&lt;CPage&gt;)
+       Childs of this tree item are the page dictionary, content streams in page
+       and annotations present in the page.
+     </para></listitem>
+     <listitem><para>TreeItemPdf - 
+       Class for tree item wrapping entire document.
+       This class is a bit exception, as it can be used in multiple modes.
+       One is for representing entire document, in other modes it can be list of document pages or list of document outlines.
+       When it is representing whole document, it contain the document dictionary, list opf outlines and list of pages as childs.
+       When it represent list, it contain all items of the given list type in document (i.e. all outlines or pages).
+     </para></listitem>
+     <listitem><para>TreeItemPdfOperator - 
+       Class for tree item wrapping single PDF Operator.
+       Child can be another suboperator (suboperators can nest arbitrary deep) or operands.
+       Theoretically both, but all PDF operators contain either operators or operands, but not both,
+       so such thing would mean the PDF file is probably corrupted.
+       Operands are derived from IProperty, so tree items representing operands will be derived from TreeItem class.
+     </para></listitem>
+    </itemizedlist>
+   </para>
+  </sect1>
+ </chapter>

@@ -1,0 +1,8 @@
+<sect3 id="gui_onclickFunctions_selectGraphicalOp" xreflabel="mode to select graphical operators">
+		<title>Selecting graphical operators</title>
+
+		<para>
+				This mode is the same as <xref linkend="gui_onclickFunctions_selectAll"/> except for
+				it only selects graphical operators.
+		</para>
+</sect3>

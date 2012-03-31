@@ -1,0 +1,30 @@
+<sect3 id="gui_onclickFunctions_selectAll" xreflabel="mode to select all objects">
+		<title>Selecting all objects</title>
+
+		<para>
+				This mode is usefull when selecting page objects (without annotations - see
+				<xref linkend="gui_onclickFunctions_selectAnnotations"/>) which are not
+				text (see <xref linkend="gui_onclickFunctions_selectText"/>) or
+				graphical (see <xref linkend="gui_onclickFunctions_selectGraphicalOp"/>)
+				operator (line, rectangle, but not image).
+		</para>
+		<para>
+				When this mode is activated,nonempty areas can be selected pressing the
+				mouse left button, dragging the mouse and releasing left button. All objects within
+				selected area will be selected.
+		</para>
+		<para>
+				When clicked only once, the one top level object on the
+				page is seleceted. If clicked again the second top most object is selected etc.
+				User doesn't need to know the size of desired object.
+		</para>
+		<para>
+				This mode is very usefull when because only few objects have the same size 
+				<xref linkend="gui_objtreepropedit_id"/>.
+		</para>
+		<para>
+				To activate this selection mode just click on appropriate place in the toolbar 
+				<xref linkend="gui_toolbars_selectionModes"/>) or select it in menu (see
+				<xref linkend="gui_menu_Edit"/>).
+		</para>
+</sect3>

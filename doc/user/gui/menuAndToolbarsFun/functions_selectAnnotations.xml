@@ -1,0 +1,17 @@
+<sect3 id="gui_onclickFunctions_selectAnnotations" xreflabel="mode to select annotations">
+		<title>Selecting annotations</title>
+
+		<para>
+				This mode displayes and enables selecting of annotations on a page.
+				When activated each annotation is displayed as a rectangle (shows
+				activation rectangle for each of annotations). It's very useful
+				because user can see all the annotations on a page and does not need
+				to search for (annotations can be hidden). Only very few viewers support
+				this feature.
+		</para>
+		<para>
+				An annotations is selected when the mouse cursor is over.
+				It is selected until the mouse cursor get over another annotation or 
+				till <emphasis>Esc</emphasis> key is not pressed.
+		</para>
+</sect3>

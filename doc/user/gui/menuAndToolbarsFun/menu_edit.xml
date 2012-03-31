@@ -1,0 +1,172 @@
+<sect1 id="gui_menu_Edit" xreflabel="menu item Edit">
+	<title>Edit</title>
+	<para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="gui/menuAndToolbarsFun/images/menu_edit.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase>Default menu item - Edit</phrase>
+				</textobject>
+				<caption><para>Default menu item <emphasis>Edit</emphasis></para></caption>
+			</mediaobject>
+	</para>
+
+	<variablelist>
+		<title>Edit - description of items </title>
+
+		<varlistentry>
+			<term id="gui_menu_selectAll" xreflabel="select all objects">Select all objects</term>
+			<listitem>
+				<para>
+						See <xref linkend="gui_onclickFunctions_selectAll"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>onSelectMode_AllObjects()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_selectGraphical" xreflabel="select graphical operators">Select graphical operators</term>
+			<listitem>
+				<para>
+						See <xref linkend="gui_onclickFunctions_selectGraphicalOp"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>onSelectMode_GraphicalOperators()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_selectText" xreflabel="select text">Select text</term>
+			<listitem>
+				<para>
+						See <xref linkend="gui_onclickFunctions_selectText"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>onSelectMode_Text()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_selectAnnot" xreflabel="select annotations">Select annotations</term>
+			<listitem>
+				<para>
+						See <xref linkend="gui_onclickFunctions_selectAnnotations"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>onSelectMode_Annot()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_setColor" xreflabel="set color">Set color</term>
+			<listitem>
+				<para>
+						Set actual <xref linkend="gui_toolbars_foregroundColor"/>
+						and <xref linkend="gui_toolbars_backgroundColor"/> to all selected
+						operators in Stream or Selection tab of <xref linkend="gui_objtreepropedit_id"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>setOpColor()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_setFont" xreflabel="set font">Set font</term>
+			<listitem>
+				<para>
+						Set actual <xref linkend="gui_toolbars_font"/>
+						and <xref linkend="gui_toolbars_fontSize"/> to all selected
+						operators in Stream or Selection tab of <xref linkend="gui_objtreepropedit_id"/>.
+				</para>
+				<para>
+						Script equivalent: <emphasis>editFontProps()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Set relative position of operator</term>
+			<listitem>
+				<para>
+						Set delta move position of every selected operator. 
+						Operators must be selected in order for
+						this function to be avaliable.
+						Useful when moving single operators on
+						a page (see <xref linkend="gui_onclickFunctions_selectionModes"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>moveOperPos()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>Change relative position</term>
+			<listitem>
+				<para>
+						Set delta move position of a text block. 
+						Text operators must be selected in order
+						for this function to be avaliable.
+						Useful when moving text paragraphs on
+						a page (see <xref linkend="gui_onclickFunctions_selectionModes"/>).
+				</para>
+				<para>
+						Script equivalent: <emphasis>moveTextPos()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_dashStyle" xreflabel="dash style">Set line dash style</term>
+			<listitem>
+				<para>
+						Set dash pattern of graphical objects.
+						Graphical objects must be selected in order for this function to be avaliable.
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="gui/menuAndToolbarsFun/images/dialog_dashpattern.png" format="PNG"/>
+							</imageobject>
+							<textobject>
+								<phrase>Dash pattern dialog</phrase>
+							</textobject>
+							<caption><para>Dash pattern dialog</para></caption>
+						</mediaobject>
+						After choosing the dash pattern this dash pattern
+						will be set to all selected graphical operators.
+				</para>
+				<para>
+						Note: Changing dash pattern may result in changing dash pattern of other
+						graphical operators (see PdfReference).
+				</para>
+				<para>
+						Script equivalent: <emphasis>setDashPattern()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term id="gui_menu_setLineWidth" xreflabel="set line width">Set line width</term>
+			<listitem>
+				<para>
+						Set <xref linkend="gui_toolbars_lineWidth"/> to all selected graphical
+						operators.
+				</para>
+				<para>
+						Note: Changing line width may result in changing line width of other
+						graphical operators (see PdfReference).
+				</para>
+				<para>
+						Script equivalent: <emphasis>setLineWidth()</emphasis>
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</sect1>

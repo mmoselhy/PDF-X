@@ -1,0 +1,127 @@
+<sect1 id="observers_in_cobjects">
+<title>Observers in cobjects</title>
+<para>
+  Generic observer mechanism described in <xref linkend="general_utils_observers"/> 
+  is used in our cobject implementation. <classname>IProperty</classname> base class implements
+  <classname>IObserverHandler</classname> interface and so all its descendants are responsible
+  for notifying about changes (see <xref linkend="kernel_part_cobjects"/>. 
+</para>
+<para>
+	All cobjects provides <classname>BasicChangeContext</classname> which contains previous value
+  of changed one. Because complex types can add and remove its elements,
+  special behaviour is specified. New value given as mandatory parameter
+  of notify method may be <classname>CNull</classname> if element is deleted from comlex type.
+  Old value in the context may also <classname>CNull</classname> if element was added. It is
+  imposible to have both of them <classname>CNull</classname>.
+</para>
+</sect1>
+
+<sect1 id="observers_in_cpdf">
+<title>Observers in CPdf</title>
+<para>
+  CPdf class as PDF file maintainer uses observers for synchronization
+  of structures which may be changed in two ways. This may occure
+  because all attributes can be accesible through properties (cobjects)
+  and also special objects provided by CPdf - CPage for page
+  manipulation, COutline for outlines manipulation and so on. Special
+  objects keeps logic of concrete entities and manipulates with cobject
+  in that way. Property part is without any logic and enables making
+  changes which are not covered by special objects. This advantage and
+  extensibility is payed by additional synchronization. 
+  <note>Property tree doesn't know the way how it was changed.</note>
+</para>
+
+<sect2 id="page_tree_synchronization">
+<title>Page tree synchronization</title>
+<para>
+     Page tree, as mentiont above, can be changed from property site of 
+	 view by making changes directly to the <xref linkend="page_tree"/> 
+	 or by CPdf using 
+<programlisting>
+	CPdf::insertPage
+	Cpdf::removePage
+</programlisting>
+     methods. Second way is safer, because all necessary workaround are 
+     done correctly here which is not guaranteed by property site, where 
+     any kind of data can be supplied.
+</para>
+<para>
+	Synchronization is guarantied by 3 internal
+	<footnote>
+	<para>
+		Classes are internal because they need access to CPdf internals, such as
+		pageList and protected methods for page tree and page list
+		consolidation.
+	</para>
+	</footnote>
+	classes which implements <classname>IObserver</classname> interface. 
+	To make their logic easier, each observer is specialized for one 
+	type of change. So that we have
+	<itemizedlist>
+		<listitem>
+			<classname>PageTreeRootObserver</classname> - which is registered on
+			Pages entry in <xref linkend="document_catalog"/>. If this 
+			value changes, we have to throw away and invalidate all pages
+			which were returned until now.
+		</listitem>
+		<listitem>
+			<classname>PageTreeNodeObserver</classname> - which is registered on
+			all intermediate nodes. If any of node's dictionary is changed,
+			checks whether it is entry which may affect page tree (Kids, Count
+			or Parent properties are added, removed, or their value is changed).
+			it has to invalidate all subtree of this node.
+		</listitem>
+		<listitem>
+			<classname>PageTreeKidsObserver</classname> - which is registered on
+			all elements of intermediate node's Kids array. If any of this 
+			element changes its value (they all should be referencies to Pages 
+			or Page dictionary), original node has to be invalidated and also 
+			its children if it is intermediate node.
+		</listitem>
+	</itemizedlist>
+	Whenever Kids array changes and as a result subtree of intermediate node is
+	changed, Count entry in node's dictionary has to be changed too and
+	propagated to the page tree root. 
+</para>
+<para>
+	All this stuff is implemented by <classname>consolidatePageTree</classname>
+	and <classname>consolidatePageList</classname> methods in CPdf. For more
+	implementation details, please see doxygen documentation.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="observer_cpage">
+	<title>Observers in CPage</title>
+	<sect2 id="observer_for_annotation">
+		<title>Observer for annotation</title>
+		<para>
+			CPage stores all CAnnotation instance from its Annots array in 
+			internal <classname>annotStorage</classname>. User can change
+			annotatations with <classname>addAnnotation</classname> or
+			<classname>delAnnotation</classname> methods but also by changing
+			Annots array directly. 
+		</para>
+		<para>
+			To prevent from problems with inconsistency, CPage instance
+			registers <classname>AnnotsArrayWatchDog</classname> observer
+			implementation on Annots array and all its members (because they are
+			referencies and someone may change reference value to target which
+			is not annotation dictionary). Whenever this array changes,
+			observer will force to reload annotStorage (see doxygen
+			documentation for more precise information because they are out of
+			scope of this documentation).
+		</para>
+	</sect2>
+</sect1>
+
+<!--
+<sect1 id="kernel_part_ccontentstream_observers">
+	<title>Observers in CContentStream</title>
+	<para>
+		Content stream object uses observer TODO Jozo - describe Observer
+		implementation - maybe some image whould be good 
+	</para>
+</sect1>
+-->
+

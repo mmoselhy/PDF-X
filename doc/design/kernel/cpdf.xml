@@ -1,0 +1,112 @@
+<!-- vim:tabstop=4:shiftwidth=4:noexpandtab:textwidth=80 
+-->
+<sect1 id="kernel_part_cpdf">
+  <title>CPdf</title>
+  <para>
+        CPdf class is main pdf document class. It maintains document content 
+		using <classname>XRefWriter</classname> field, document catalog PDF dictionary and provides 
+		other specialized highlevel objects such as CPage (see <xref linkend="kernel_part_cpage"/>) 
+		and <classname>COutline</classname>.
+  </para>
+  <para>
+        Main responsibility is to keep all objects (it provides) synchronized 
+        with data which are used for them. As an example, it has to keep
+        CPage instances synchronized with current state of page tree. 
+  </para>
+  <para>
+	  In design terminology, CPdf provides <xref linkend="facade"/>;  to 
+	  manipulate with file in document scope of view. All internal objects 
+	  used for particular purposes are hidden from class user and CPdf 
+	  provides interface for manipulation with it (as an example, CPdf uses
+	  <classname>XRefWriter</classname> (see <xref linkend="kernel_part_xrefwriter"/>) 
+	  which enables making changes to document, but exports only
+	  <classname>CXref</classname> (see <xref linkend="kernel_part_cxref"/>)
+	  which enables just objects fetching - almost same interface as Xpdf 
+	  <classname>XRef</classname> class).
+  </para>
+  <sect2 id="instance_life_cycle">
+    <title>Instance life cycle</title>
+    <para>
+		Instance of CPdf can be create only by <classname>getInstance</classname>
+		factory method (see <xref linkend="factory_method"/>) which returns
+		instanstance wraped by shared_ptr which controls the life cycle.
+		Instance is deallocated when the last reference to it is droped.
+		CPdf instance is one purpose object which maintains exactly one 
+		document during its lifetime (between creation and close).
+    </para>
+  </sect2>
+  <sect2 id="cpdf_modes">
+    <title>CPdf modes</title>
+    <para>
+        Each document may be opened in one of several modes. Each controls
+        set of activities which can be done. ReadOnly mode guaranties that
+        no change can be done to document. ReadWrite mode enables making
+        changes but with some restriction (see programming documentation
+        for more information). Finaly Advanced mode brigns full control
+        upon document.
+    </para>
+  </sect2>
+  <sect2 id="properties_chaning">
+    <title>Properties changing and revision handling</title>
+    <para>
+		All changes to the document are done using
+		<classname>XRefWriter</classname> as described in <xref linkend="kernel_part_layers_ch"/>. Additional
+        logic and responsibility of CPdf in this direction is to make adpater
+		from <classname>IProperty</classname> interface of property to xpdf Object required by 
+		<classname>XRefWriter</classname>. Even more it also provides interface to get indirect
+        objects in IProperty form. This means that it obscures low level 
+        information about who is doing parsing and storing and what data
+        types are used. Also guaranties that all indirect properties are
+        represented by same instance of IProperty to enable their reasonable 
+        usage.
+    </para>
+	<para>
+		To enable proper smart pointer implementation, CPdf holds weak_ptr
+		to itself (called _this) initialized from shared_ptr returned by 
+		getInstance factory method. This is in turn used for initialization
+		of all properties. The trick is that weak_ptr are valid only until
+		original shared_ptr is valid. In the moment when the last reference
+		is droped, all weak_ptr are no more valid and code which tries to use
+		them can detect that without any problems (weak_ptr::lock method will
+		simply fail and code can handle that).
+	</para>
+    <para>
+        To enable also inter document data exchange (in form of properties),
+        it provides functionality for adding of indirect properties. When
+        property is from other CPdf (this may mean other document), it'll do 
+        all neccesary handling for this situation (e. g. all other indirect
+        objects which are refered from added one are added too).
+    </para>
+    <para>
+        Revision handling is done similar way but in this case without any 
+        special logic. Revision changing and geting current revision or 
+		cloning is directly delegated to <classname>XRefWriter</classname>. If document save
+        is required, just checks whether mode is not read only and delegates
+		the rest to <classname>XRefWriter</classname>
+    </para>
+  </sect2>
+  <sect2 id="high_level_objects">
+    <title>Provided high level objects</title>
+    <para>
+        CPdf provides high level objects maintaining some specialized part
+		of document <xref linkend="document_catalog"/>. These objects brings 
+		logic on properties with special meaning in pdf document.
+		<footnote>
+			<para>
+				E. g. Pdf describes page as dictionary which contains all 
+				neccessary information for page (page attributes), its position
+				in page tree (reference to parent tree node) and its content 
+				stored in <xref linkend="content_stream"/>. <classname>CPage</classname> then uses 
+				this dictionary for its initialization and provides logic for
+				this dictionary.
+			</para>
+		</footnote>
+    </para>
+ 	<mediaobject>
+	  <imageobject>
+          <imagedata fileref="kernel/images/cpdf_facade.png" format="PNG"/>
+	  </imageobject>
+	  <caption><para>CPdf facade scheme</para></caption>
+	</mediaobject>
+  </sect2>
+</sect1>

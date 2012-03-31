@@ -1,0 +1,48 @@
+<part id="scripts_part">
+ <title>Scripting documentation for PDF Editor</title>
+ &scripts_intro;
+ &scripts_startup;
+ <chapter id="static_common">
+  <title>Static functions common for GUI and command line</title>
+<!--BASETYPE: base.h -->
+ </chapter>
+ <chapter id="static_gui">
+  <title>Static functions in GUI</title>
+<!--BASETYPE: basegui.h -->
+ </chapter>
+ <chapter id="static_cmdline">
+  <title>Static functions in command line</title>
+<!--BASETYPE: baseconsole.h -->
+ </chapter>
+ &scripts_callbacks;
+ &scripts_objects;
+ <chapter id="object_types_common">
+  <title>Object types (common and PDF objects)</title>
+<!--TYPE: qsannotation.h -->
+<!--TYPE: qsarray.h -->
+<!--TYPE: qscobject.h -->
+<!--TYPE: qscontentstream.h -->
+<!--TYPE: qsdict.h -->
+<!--TYPE: qsiproperty.h -->
+<!--TYPE: qsipropertyarray.h -->
+<!--TYPE: qspage.h -->
+<!--TYPE: qspdf.h -->
+<!--TYPE: qspdfoperator.h -->
+<!--TYPE: qspdfoperatoriterator.h -->
+<!--TYPE: qspdfoperatorstack.h -->
+<!--TYPE: qsstream.h -->
+ </chapter>
+ <chapter id="object_types_gui">
+  <title>Object types (GUI objects)</title>
+  <para>
+   These object types do not have direct corespondence to any object inside PDF document,
+   but some of them may allow you to manipulate them indirectly.
+   Main focus of these types is to interact with user.
+  </para>
+<!--TYPE: qsmenu.h -->
+<!--TYPE: qstreeitem.h -->
+<!--TYPE: qstreeitemcontentstream.h -->
+ </chapter>
+ &qsa_util;
+ &qsa_dialog;
+</part>
