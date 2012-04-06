@@ -32,7 +32,7 @@
 // WARNING: DO NOT INCLUDE from header files visible outside gui code!!!
 
 /** Application name shown in various About boxes, window titles, etc .... */
-#define APP_NAME "PDFedit"
+#define APP_NAME "PDF-X"
 
 // It is not a macro, because we want to provide this information only 
 // during link time to prevevent from many modules rebuilding when we
