@@ -63,11 +63,11 @@ AboutWindow::AboutWindow(QWidget *parent/*=0*/,const char *name/*=0*/):QWidget(p
 
  //Text in about window
  QString info=QString("<big><b>")+tr("Free program for PDF document manipulation")+"</b></big><br><br>"
-  +tr("Homepage")+" : http://pdfedit.petricek.net/<br>"
-  +tr("Project page")+" : http://sourceforge.net/projects/pdfedit";
+  +tr("Homepage")+" : Not yet<br>"
+  +tr("Project page")+" : https://github.com/mmoselhy/PDF-X";
 
- QString authors=QString("<b>Copyright (C) 2006 - 2009 PDFedit team:</b><br>")
-  +QString::fromUtf8("&nbsp; Michal Hocko<br>&nbsp; Miro Jahoda<br>&nbsp; Jozef Mišutka<br>&nbsp; Martin Petříček<br>");
+ QString authors=QString("<b>Copyright (C) 2012 - 2013 PDFedit team:</b><br>")
+  +QString::fromUtf8("&nbsp; Mohamed Moselhy<br>&nbsp; Mohamed Emad<br>&nbsp; Mohamed Hossam<br>&nbsp; Mahmoud Khaled<br>&nbsp; Haitham Moustafa <br>");
 
  QLabel *lb=new QLabel(QString("<table><tr><td valign=\"top\"><h1>")+app+"</h1>"+tr("Compiled")+": "+COMPILE_TIME
   +"<br>"+tr("Using Qt %1").arg(QT_VERSION_STR)
